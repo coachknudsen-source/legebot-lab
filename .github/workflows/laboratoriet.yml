@@ -1,0 +1,52 @@
+name: Laboratoriet
+
+on:
+  schedule:
+    - cron: '10 2 * * *'      # hver nat kl. 02:10 UTC (03:10 dansk vintertid). Søndag kører den grundige test.
+  workflow_dispatch:           # knappen "Run workflow" til en kørsel med det samme
+    inputs:
+      tilstand:
+        description: 'nat (hurtig) eller soendag (grundig)'
+        default: 'nat'
+
+permissions:
+  contents: write              # så kørslen kan gemme strategier.json og rapport.md i repoet
+
+concurrency:
+  group: laboratoriet
+  cancel-in-progress: false
+
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Kurshistorik (gemmes mellem kørsler, så kun nye dage hentes)
+        uses: actions/cache@v4
+        with:
+          path: data
+          key: kurser-${{ github.run_id }}
+          restore-keys: kurser-
+
+      - name: Kør laboratoriet
+        run: |
+          if [ "${{ github.event.inputs.tilstand }}" = "soendag" ]; then python lab.py --soendag
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then python lab.py --nat
+          else python lab.py; fi
+
+      - name: Gem resultatet
+        run: |
+          git config user.name "laboratoriet"
+          git config user.email "laboratoriet@users.noreply.github.com"
+          git add strategier.json rapport.md
+          git diff --cached --quiet || git commit -m "Laboratoriet $(date -u +%Y-%m-%d)"
+          git push
