@@ -1,9 +1,9 @@
 {
- "genereret": "2026-11-19T03:46Z",
+ "genereret": "2026-11-19T07:49Z",
  "periode": {
   "fra": "2022-11-01",
-  "til": "2026-11-17",
-  "in_sample_til": "2025-11-13"
+  "til": "2026-11-18",
+  "in_sample_til": "2025-11-14"
  },
  "regimer": {
   "bull": null,
@@ -12,21 +12,23 @@
     "setup": "trend_lang",
     "bestaaet": false,
     "karakter": 1,
-    "lb": 20,
+    "lb": 10,
     "stopATR": 0.5,
     "tp1R": 2.0,
-    "volF": 1.5,
-    "limitATR": 0.0
+    "volF": 1.2,
+    "limitATR": 0.0,
+    "btcF": 1
    },
    {
     "setup": "trend_lang",
     "bestaaet": false,
     "karakter": 1,
-    "lb": 20,
-    "stopATR": 0.5,
-    "tp1R": 2.5,
+    "lb": 10,
+    "stopATR": 1.0,
+    "tp1R": 2.0,
     "volF": 1.5,
-    "limitATR": 0.0
+    "limitATR": 0.0,
+    "btcF": 1
    }
   ],
   "bear": null,
@@ -38,8 +40,9 @@
     "lb": 40,
     "stopATR": 1.0,
     "tp1R": 2.0,
-    "volF": 1.5,
-    "limitATR": 0.0
+    "volF": 1.2,
+    "limitATR": 0.25,
+    "btcF": 1
    },
    {
     "setup": "trend_short",
@@ -49,7 +52,8 @@
     "stopATR": 1.0,
     "tp1R": 2.5,
     "volF": 1.2,
-    "limitATR": 0.0
+    "limitATR": 0.25,
+    "btcF": 0
    }
   ],
   "flat": null,
@@ -62,17 +66,19 @@
     "stopATR": 1.0,
     "tp1R": 2.5,
     "volF": 1.2,
-    "limitATR": 0.0
+    "limitATR": 0.25,
+    "btcF": 0
    },
    {
     "setup": "range",
     "bestaaet": false,
     "karakter": 1,
     "lb": 40,
-    "stopATR": 1.0,
+    "stopATR": 0.5,
     "tp1R": 2.5,
     "volF": 1.2,
-    "limitATR": 0.25
+    "limitATR": 0.0,
+    "btcF": 0
    }
   ],
   "trend": null,
@@ -83,15 +89,17 @@
     "karakter": 3,
     "N": 55,
     "M": 20,
-    "stopATR": 2.0
+    "stopATR": 2.0,
+    "btcF": 0
    },
    {
     "setup": "dagtrend",
     "bestaaet": false,
     "karakter": 3,
-    "N": 20,
-    "M": 20,
-    "stopATR": 3.0
+    "N": 55,
+    "M": 10,
+    "stopATR": 2.0,
+    "btcF": 1
    }
   ]
  },
@@ -105,55 +113,56 @@
     "regime": "bull",
     "navn": "Pullback-køb i bullish regime",
     "indstillinger": {
-     "lb": 20,
+     "lb": 10,
      "stopATR": 0.5,
      "tp1R": 2.0,
-     "volF": 1.2,
-     "limitATR": 0.0
+     "volF": 1.5,
+     "limitATR": 0.0,
+     "btcF": 1
     },
     "karakter": 1,
     "ide": "Køb, når en optrend laver et dyk, der fejer stop under et oplagt bund, og kursen derefter bryder op igen.",
     "hvorfor": "Tradere sætter stop under oplagte bunde. Når de bliver ramt, sælges der i panik til de tålmodige købere – ofte lige før trenden fortsætter.",
     "betaler": "De tradere, hvis stop bliver fejet, og dem der shorter for sent i en optrend.",
     "regler": {
-     "indgang": "Sweep af det laveste/højeste niveau de seneste 20 lys (15 min) + strukturskift, volumen ≥ 1.2× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre til lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
+     "indgang": "Sweep af det laveste/højeste niveau de seneste 10 lys (15 min) + strukturskift, volumen ≥ 1.5× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre til lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
      "stop": "Bag sweep-lunten + 0.5 × ATR(15 min). Markedsordre (taker-gebyr).",
      "exit": "TP1 ved 2.0R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (4.0R uden niveau).",
-     "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5."
+     "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5. BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish."
     },
     "in_sample": {
-     "netto": -0.04083831696156476,
-     "handler": 404,
-     "koebt_og_holdt": 1.0822677522141129
+     "netto": -0.11745050041639987,
+     "handler": 507,
+     "koebt_og_holdt": 0.9861211482397727
     },
     "walk_forward": {
-     "netto": -0.23988991006824661,
-     "handler": 353,
-     "vinderrate": 0.29461756373937675,
-     "profitfaktor": 0.7929944750108664,
-     "stoerste_fald": 0.37875292789984544,
-     "laengste_tabsraekke": 14,
-     "vaerste_maaned": -0.05160244643233033,
-     "koebt_og_holdt": 0.413226623782754,
-     "koebt_og_holdt_fald": 0.7102358844754513
+     "netto": -0.07778489031910023,
+     "handler": 260,
+     "vinderrate": 0.31153846153846154,
+     "profitfaktor": 0.9048947368191889,
+     "stoerste_fald": 0.26159829042203175,
+     "laengste_tabsraekke": 17,
+     "vaerste_maaned": -0.03706273189477116,
+     "koebt_og_holdt": 0.32601361447734795,
+     "koebt_og_holdt_fald": 0.6796639263964127
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.5504495504495505,
+     "wf_permutation_p": 0.3926073926073926,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
     },
-    "robusthed": 0.2857142857142857,
-    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 16.",
+    "robusthed": 0.0,
+    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 19.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 55 % af forsøgene (p=0.550)",
-     "kun 29 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
-     "lange tabsrækker (14) – Sentinel kan stoppe botten",
+     "på usete data klarede blandede markeder sig lige så godt i 39 % af forsøgene (p=0.393)",
+     "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
+     "lange tabsrækker (17) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
      "markedet kan skifte karakter, så fortidens edge forsvinder"
     ]
@@ -166,55 +175,56 @@
     "regime": "bull",
     "navn": "Pullback-køb i bullish regime",
     "indstillinger": {
-     "lb": 20,
+     "lb": 10,
      "stopATR": 0.5,
      "tp1R": 2.0,
-     "volF": 1.5,
-     "limitATR": 0.0
+     "volF": 1.2,
+     "limitATR": 0.0,
+     "btcF": 1
     },
     "karakter": 1,
     "ide": "Køb, når en optrend laver et dyk, der fejer stop under et oplagt bund, og kursen derefter bryder op igen.",
     "hvorfor": "Tradere sætter stop under oplagte bunde. Når de bliver ramt, sælges der i panik til de tålmodige købere – ofte lige før trenden fortsætter.",
     "betaler": "De tradere, hvis stop bliver fejet, og dem der shorter for sent i en optrend.",
     "regler": {
-     "indgang": "Sweep af det laveste/højeste niveau de seneste 20 lys (15 min) + strukturskift, volumen ≥ 1.5× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre til lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
+     "indgang": "Sweep af det laveste/højeste niveau de seneste 10 lys (15 min) + strukturskift, volumen ≥ 1.2× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre til lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
      "stop": "Bag sweep-lunten + 0.5 × ATR(15 min). Markedsordre (taker-gebyr).",
      "exit": "TP1 ved 2.0R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (4.0R uden niveau).",
-     "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5."
+     "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5. BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish."
     },
     "in_sample": {
-     "netto": -0.0441298065152334,
-     "handler": 298,
-     "koebt_og_holdt": 1.0822677522141129
+     "netto": -0.1603693663633495,
+     "handler": 677,
+     "koebt_og_holdt": 0.9861211482397727
     },
     "walk_forward": {
-     "netto": -0.23988991006824661,
-     "handler": 353,
-     "vinderrate": 0.29461756373937675,
-     "profitfaktor": 0.7929944750108664,
-     "stoerste_fald": 0.37875292789984544,
-     "laengste_tabsraekke": 14,
-     "vaerste_maaned": -0.05160244643233033,
-     "koebt_og_holdt": 0.413226623782754,
-     "koebt_og_holdt_fald": 0.7102358844754513
+     "netto": -0.07778489031910023,
+     "handler": 260,
+     "vinderrate": 0.31153846153846154,
+     "profitfaktor": 0.9048947368191889,
+     "stoerste_fald": 0.26159829042203175,
+     "laengste_tabsraekke": 17,
+     "vaerste_maaned": -0.03706273189477116,
+     "koebt_og_holdt": 0.32601361447734795,
+     "koebt_og_holdt_fald": 0.6796639263964127
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.5504495504495505,
+     "wf_permutation_p": 0.3926073926073926,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
     },
-    "robusthed": 0.2857142857142857,
-    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 16.",
+    "robusthed": 0.0,
+    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 19.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 55 % af forsøgene (p=0.550)",
-     "kun 29 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
-     "lange tabsrækker (14) – Sentinel kan stoppe botten",
+     "på usete data klarede blandede markeder sig lige så godt i 39 % af forsøgene (p=0.393)",
+     "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
+     "lange tabsrækker (17) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
      "markedet kan skifte karakter, så fortidens edge forsvinder"
     ]
@@ -227,54 +237,56 @@
     "regime": "bull",
     "navn": "Pullback-køb i bullish regime",
     "indstillinger": {
-     "lb": 20,
-     "stopATR": 0.5,
-     "tp1R": 2.5,
+     "lb": 10,
+     "stopATR": 1.0,
+     "tp1R": 2.0,
      "volF": 1.5,
-     "limitATR": 0.0
+     "limitATR": 0.0,
+     "btcF": 1
     },
     "karakter": 1,
     "ide": "Køb, når en optrend laver et dyk, der fejer stop under et oplagt bund, og kursen derefter bryder op igen.",
     "hvorfor": "Tradere sætter stop under oplagte bunde. Når de bliver ramt, sælges der i panik til de tålmodige købere – ofte lige før trenden fortsætter.",
     "betaler": "De tradere, hvis stop bliver fejet, og dem der shorter for sent i en optrend.",
     "regler": {
-     "indgang": "Sweep af det laveste/højeste niveau de seneste 20 lys (15 min) + strukturskift, volumen ≥ 1.5× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre til lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
-     "stop": "Bag sweep-lunten + 0.5 × ATR(15 min). Markedsordre (taker-gebyr).",
-     "exit": "TP1 ved 2.5R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (5.0R uden niveau).",
-     "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5."
+     "indgang": "Sweep af det laveste/højeste niveau de seneste 10 lys (15 min) + strukturskift, volumen ≥ 1.5× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre til lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
+     "stop": "Bag sweep-lunten + 1.0 × ATR(15 min). Markedsordre (taker-gebyr).",
+     "exit": "TP1 ved 2.0R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (4.0R uden niveau).",
+     "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5. BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish."
     },
     "in_sample": {
-     "netto": 0.010462876974742422,
-     "handler": 352,
-     "koebt_og_holdt": 1.0822677522141129
+     "netto": -0.04739998208104415,
+     "handler": 476,
+     "koebt_og_holdt": 0.9861211482397727
     },
     "walk_forward": {
-     "netto": -0.23988991006824661,
-     "handler": 353,
-     "vinderrate": 0.29461756373937675,
-     "profitfaktor": 0.7929944750108664,
-     "stoerste_fald": 0.37875292789984544,
-     "laengste_tabsraekke": 14,
-     "vaerste_maaned": -0.05160244643233033,
-     "koebt_og_holdt": 0.413226623782754,
-     "koebt_og_holdt_fald": 0.7102358844754513
+     "netto": -0.07778489031910023,
+     "handler": 260,
+     "vinderrate": 0.31153846153846154,
+     "profitfaktor": 0.9048947368191889,
+     "stoerste_fald": 0.26159829042203175,
+     "laengste_tabsraekke": 17,
+     "vaerste_maaned": -0.03706273189477116,
+     "koebt_og_holdt": 0.32601361447734795,
+     "koebt_og_holdt_fald": 0.6796639263964127
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.5504495504495505,
+     "wf_permutation_p": 0.3926073926073926,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
     },
-    "robusthed": 0.6666666666666666,
-    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 16.",
+    "robusthed": 0.14285714285714285,
+    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 19.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 55 % af forsøgene (p=0.550)",
-     "lange tabsrækker (14) – Sentinel kan stoppe botten",
+     "på usete data klarede blandede markeder sig lige så godt i 39 % af forsøgene (p=0.393)",
+     "kun 14 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
+     "lange tabsrækker (17) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
      "markedet kan skifte karakter, så fortidens edge forsvinder"
     ]
@@ -292,52 +304,53 @@
      "lb": 40,
      "stopATR": 1.0,
      "tp1R": 2.5,
-     "volF": 1.5,
-     "limitATR": 0.0
+     "volF": 1.2,
+     "limitATR": 0.25,
+     "btcF": 1
     },
     "karakter": 1,
     "ide": "Short, når en nedtrend laver et hop, der fejer stop over en oplagt top, og kursen derefter bryder ned igen.",
     "hvorfor": "Shortere sætter stop over oplagte toppe. Når de bliver købt ud, er der ingen købere tilbage, og nedtrenden fortsætter.",
     "betaler": "Shortere, der bliver fejet ud, og købere der \"køber dykket\" i en nedtrend.",
     "regler": {
-     "indgang": "Sweep af det laveste/højeste niveau de seneste 40 lys (15 min) + strukturskift, volumen ≥ 1.5× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre til lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
+     "indgang": "Sweep af det laveste/højeste niveau de seneste 40 lys (15 min) + strukturskift, volumen ≥ 1.2× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre 0.25 × ATR under/over lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
      "stop": "Bag sweep-lunten + 1.0 × ATR(15 min). Markedsordre (taker-gebyr).",
      "exit": "TP1 ved 2.5R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (5.0R uden niveau).",
-     "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5."
+     "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5. BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish."
     },
     "in_sample": {
-     "netto": 0.04624848662671533,
-     "handler": 129,
-     "koebt_og_holdt": -0.11493774527350256
+     "netto": -0.22726268431652766,
+     "handler": 160,
+     "koebt_og_holdt": -0.13190309270943132
     },
     "walk_forward": {
-     "netto": -0.14892714370743715,
-     "handler": 242,
-     "vinderrate": 0.2768595041322314,
-     "profitfaktor": 0.8360812833570187,
-     "stoerste_fald": 0.31363963407666096,
-     "laengste_tabsraekke": 20,
-     "vaerste_maaned": -0.07420675023275564,
-     "koebt_og_holdt": -0.2000033940481944,
-     "koebt_og_holdt_fald": 0.7027901699605921
+     "netto": -0.22654924082074424,
+     "handler": 254,
+     "vinderrate": 0.2874015748031496,
+     "profitfaktor": 0.7477649902091801,
+     "stoerste_fald": 0.29353927116419753,
+     "laengste_tabsraekke": 21,
+     "vaerste_maaned": -0.06774630456535524,
+     "koebt_og_holdt": -0.20795202886701247,
+     "koebt_og_holdt_fald": 0.7063057873043479
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.46053946053946054,
+     "wf_permutation_p": 0.7662337662337663,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
     },
-    "robusthed": 0.4,
-    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 22.",
+    "robusthed": 0.0,
+    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 23.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 46 % af forsøgene (p=0.461)",
-     "kun 40 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
-     "lange tabsrækker (20) – Sentinel kan stoppe botten",
+     "på usete data klarede blandede markeder sig lige så godt i 77 % af forsøgene (p=0.766)",
+     "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
+     "lange tabsrækker (21) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
      "markedet kan skifte karakter, så fortidens edge forsvinder"
     ]
@@ -353,51 +366,53 @@
      "lb": 40,
      "stopATR": 1.0,
      "tp1R": 2.0,
-     "volF": 1.5,
-     "limitATR": 0.0
+     "volF": 1.2,
+     "limitATR": 0.25,
+     "btcF": 1
     },
     "karakter": 1,
     "ide": "Short, når en nedtrend laver et hop, der fejer stop over en oplagt top, og kursen derefter bryder ned igen.",
     "hvorfor": "Shortere sætter stop over oplagte toppe. Når de bliver købt ud, er der ingen købere tilbage, og nedtrenden fortsætter.",
     "betaler": "Shortere, der bliver fejet ud, og købere der \"køber dykket\" i en nedtrend.",
     "regler": {
-     "indgang": "Sweep af det laveste/højeste niveau de seneste 40 lys (15 min) + strukturskift, volumen ≥ 1.5× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre til lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
+     "indgang": "Sweep af det laveste/højeste niveau de seneste 40 lys (15 min) + strukturskift, volumen ≥ 1.2× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre 0.25 × ATR under/over lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
      "stop": "Bag sweep-lunten + 1.0 × ATR(15 min). Markedsordre (taker-gebyr).",
      "exit": "TP1 ved 2.0R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (4.0R uden niveau).",
-     "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5."
+     "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5. BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish."
     },
     "in_sample": {
-     "netto": 0.08050720859602391,
-     "handler": 100,
-     "koebt_og_holdt": -0.11493774527350256
+     "netto": -0.12179841030817612,
+     "handler": 125,
+     "koebt_og_holdt": -0.13190309270943132
     },
     "walk_forward": {
-     "netto": -0.14892714370743715,
-     "handler": 242,
-     "vinderrate": 0.2768595041322314,
-     "profitfaktor": 0.8360812833570187,
-     "stoerste_fald": 0.31363963407666096,
-     "laengste_tabsraekke": 20,
-     "vaerste_maaned": -0.07420675023275564,
-     "koebt_og_holdt": -0.2000033940481944,
-     "koebt_og_holdt_fald": 0.7027901699605921
+     "netto": -0.22654924082074424,
+     "handler": 254,
+     "vinderrate": 0.2874015748031496,
+     "profitfaktor": 0.7477649902091801,
+     "stoerste_fald": 0.29353927116419753,
+     "laengste_tabsraekke": 21,
+     "vaerste_maaned": -0.06774630456535524,
+     "koebt_og_holdt": -0.20795202886701247,
+     "koebt_og_holdt_fald": 0.7063057873043479
     },
     "tests": {
-     "in_sample": true,
+     "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.46053946053946054,
+     "wf_permutation_p": 0.7662337662337663,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
     },
-    "robusthed": 0.6666666666666666,
-    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 22.",
+    "robusthed": 0.0,
+    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 23.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 46 % af forsøgene (p=0.461)",
-     "lange tabsrækker (20) – Sentinel kan stoppe botten",
+     "på usete data klarede blandede markeder sig lige så godt i 77 % af forsøgene (p=0.766)",
+     "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
+     "lange tabsrækker (21) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
      "markedet kan skifte karakter, så fortidens edge forsvinder"
     ]
@@ -414,51 +429,52 @@
      "stopATR": 1.0,
      "tp1R": 2.5,
      "volF": 1.2,
-     "limitATR": 0.0
+     "limitATR": 0.25,
+     "btcF": 0
     },
     "karakter": 1,
     "ide": "Short, når en nedtrend laver et hop, der fejer stop over en oplagt top, og kursen derefter bryder ned igen.",
     "hvorfor": "Shortere sætter stop over oplagte toppe. Når de bliver købt ud, er der ingen købere tilbage, og nedtrenden fortsætter.",
     "betaler": "Shortere, der bliver fejet ud, og købere der \"køber dykket\" i en nedtrend.",
     "regler": {
-     "indgang": "Sweep af det laveste/højeste niveau de seneste 40 lys (15 min) + strukturskift, volumen ≥ 1.2× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre til lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
+     "indgang": "Sweep af det laveste/højeste niveau de seneste 40 lys (15 min) + strukturskift, volumen ≥ 1.2× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre 0.25 × ATR under/over lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
      "stop": "Bag sweep-lunten + 1.0 × ATR(15 min). Markedsordre (taker-gebyr).",
      "exit": "TP1 ved 2.5R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (5.0R uden niveau).",
      "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5."
     },
     "in_sample": {
-     "netto": -0.07101987492737069,
-     "handler": 177,
-     "koebt_og_holdt": -0.11493774527350256
+     "netto": -0.1550861149200012,
+     "handler": 192,
+     "koebt_og_holdt": -0.13190309270943132
     },
     "walk_forward": {
-     "netto": -0.14892714370743715,
-     "handler": 242,
-     "vinderrate": 0.2768595041322314,
-     "profitfaktor": 0.8360812833570187,
-     "stoerste_fald": 0.31363963407666096,
-     "laengste_tabsraekke": 20,
-     "vaerste_maaned": -0.07420675023275564,
-     "koebt_og_holdt": -0.2000033940481944,
-     "koebt_og_holdt_fald": 0.7027901699605921
+     "netto": -0.22654924082074424,
+     "handler": 254,
+     "vinderrate": 0.2874015748031496,
+     "profitfaktor": 0.7477649902091801,
+     "stoerste_fald": 0.29353927116419753,
+     "laengste_tabsraekke": 21,
+     "vaerste_maaned": -0.06774630456535524,
+     "koebt_og_holdt": -0.20795202886701247,
+     "koebt_og_holdt_fald": 0.7063057873043479
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.46053946053946054,
+     "wf_permutation_p": 0.7662337662337663,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
     },
-    "robusthed": 0.2,
-    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 22.",
+    "robusthed": 0.0,
+    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 23.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 46 % af forsøgene (p=0.461)",
-     "kun 20 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
-     "lange tabsrækker (20) – Sentinel kan stoppe botten",
+     "på usete data klarede blandede markeder sig lige så godt i 77 % af forsøgene (p=0.766)",
+     "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
+     "lange tabsrækker (21) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
      "markedet kan skifte karakter, så fortidens edge forsvinder"
     ]
@@ -474,54 +490,55 @@
     "navn": "Range-handel i flat regime",
     "indstillinger": {
      "lb": 40,
-     "stopATR": 0.5,
-     "tp1R": 2.0,
+     "stopATR": 1.0,
+     "tp1R": 2.5,
      "volF": 1.2,
-     "limitATR": 0.25
+     "limitATR": 0.0,
+     "btcF": 0
     },
     "karakter": 1,
     "ide": "Køb ved range-bunden og short ved range-toppen, når et sweep af niveauet bliver afvist.",
     "hvorfor": "I et sidelæns marked bliver udbrud ofte afvist. Sweep af range-kanten fanger dem, der jagter udbruddet.",
     "betaler": "Tradere, der køber udbrud over toppen eller sælger brud under bunden i et marked uden trend.",
     "regler": {
-     "indgang": "Sweep af det laveste/højeste niveau de seneste 40 lys (15 min) + strukturskift, volumen ≥ 1.2× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre 0.25 × ATR under/over lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
-     "stop": "Bag sweep-lunten + 0.5 × ATR(15 min). Markedsordre (taker-gebyr).",
-     "exit": "TP1 ved 2.0R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (4.0R uden niveau).",
+     "indgang": "Sweep af det laveste/højeste niveau de seneste 40 lys (15 min) + strukturskift, volumen ≥ 1.2× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre til lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
+     "stop": "Bag sweep-lunten + 1.0 × ATR(15 min). Markedsordre (taker-gebyr).",
+     "exit": "TP1 ved 2.5R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (5.0R uden niveau).",
      "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5."
     },
     "in_sample": {
-     "netto": -0.12319853067102654,
-     "handler": 179,
-     "koebt_og_holdt": 0.19487330506729503
+     "netto": -0.1958823353025382,
+     "handler": 159,
+     "koebt_og_holdt": 0.19778012334044703
     },
     "walk_forward": {
-     "netto": -0.10978530869327893,
-     "handler": 126,
-     "vinderrate": 0.2698412698412698,
-     "profitfaktor": 0.6606039677219948,
-     "stoerste_fald": 0.12625374383542592,
-     "laengste_tabsraekke": 11,
-     "vaerste_maaned": -0.02024316446613162,
-     "koebt_og_holdt": -0.22579038572197754,
-     "koebt_og_holdt_fald": 0.6622427737983678
+     "netto": -0.14590424275850244,
+     "handler": 124,
+     "vinderrate": 0.24193548387096775,
+     "profitfaktor": 0.5698997852326549,
+     "stoerste_fald": 0.1630467162577089,
+     "laengste_tabsraekke": 22,
+     "vaerste_maaned": -0.024364069162472482,
+     "koebt_og_holdt": -0.18657099585986286,
+     "koebt_og_holdt_fald": 0.68457899123762
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.8851148851148851,
+     "wf_permutation_p": 0.9240759240759241,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
     },
     "robusthed": 0.0,
-    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 13.",
+    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 24.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 89 % af forsøgene (p=0.885)",
+     "på usete data klarede blandede markeder sig lige så godt i 92 % af forsøgene (p=0.924)",
      "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
-     "lange tabsrækker (11) – Sentinel kan stoppe botten",
+     "lange tabsrækker (22) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
      "markedet kan skifte karakter, så fortidens edge forsvinder"
     ]
@@ -538,51 +555,52 @@
      "stopATR": 1.0,
      "tp1R": 2.5,
      "volF": 1.2,
-     "limitATR": 0.0
+     "limitATR": 0.25,
+     "btcF": 0
     },
     "karakter": 1,
     "ide": "Køb ved range-bunden og short ved range-toppen, når et sweep af niveauet bliver afvist.",
     "hvorfor": "I et sidelæns marked bliver udbrud ofte afvist. Sweep af range-kanten fanger dem, der jagter udbruddet.",
     "betaler": "Tradere, der køber udbrud over toppen eller sælger brud under bunden i et marked uden trend.",
     "regler": {
-     "indgang": "Sweep af det laveste/højeste niveau de seneste 40 lys (15 min) + strukturskift, volumen ≥ 1.2× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre til lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
+     "indgang": "Sweep af det laveste/højeste niveau de seneste 40 lys (15 min) + strukturskift, volumen ≥ 1.2× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre 0.25 × ATR under/over lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
      "stop": "Bag sweep-lunten + 1.0 × ATR(15 min). Markedsordre (taker-gebyr).",
      "exit": "TP1 ved 2.5R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (5.0R uden niveau).",
      "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5."
     },
     "in_sample": {
-     "netto": -0.13978687864827866,
-     "handler": 154,
-     "koebt_og_holdt": 0.19487330506729503
+     "netto": -0.15740386374909743,
+     "handler": 179,
+     "koebt_og_holdt": 0.19778012334044703
     },
     "walk_forward": {
-     "netto": -0.10978530869327893,
-     "handler": 126,
-     "vinderrate": 0.2698412698412698,
-     "profitfaktor": 0.6606039677219948,
-     "stoerste_fald": 0.12625374383542592,
-     "laengste_tabsraekke": 11,
-     "vaerste_maaned": -0.02024316446613162,
-     "koebt_og_holdt": -0.22579038572197754,
-     "koebt_og_holdt_fald": 0.6622427737983678
+     "netto": -0.14590424275850244,
+     "handler": 124,
+     "vinderrate": 0.24193548387096775,
+     "profitfaktor": 0.5698997852326549,
+     "stoerste_fald": 0.1630467162577089,
+     "laengste_tabsraekke": 22,
+     "vaerste_maaned": -0.024364069162472482,
+     "koebt_og_holdt": -0.18657099585986286,
+     "koebt_og_holdt_fald": 0.68457899123762
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.8851148851148851,
+     "wf_permutation_p": 0.9240759240759241,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
     },
     "robusthed": 0.0,
-    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 13.",
+    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 24.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 89 % af forsøgene (p=0.885)",
+     "på usete data klarede blandede markeder sig lige så godt i 92 % af forsøgene (p=0.924)",
      "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
-     "lange tabsrækker (11) – Sentinel kan stoppe botten",
+     "lange tabsrækker (22) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
      "markedet kan skifte karakter, så fortidens edge forsvinder"
     ]
@@ -596,54 +614,55 @@
     "navn": "Range-handel i flat regime",
     "indstillinger": {
      "lb": 40,
-     "stopATR": 1.0,
+     "stopATR": 0.5,
      "tp1R": 2.5,
      "volF": 1.2,
-     "limitATR": 0.25
+     "limitATR": 0.0,
+     "btcF": 0
     },
     "karakter": 1,
     "ide": "Køb ved range-bunden og short ved range-toppen, når et sweep af niveauet bliver afvist.",
     "hvorfor": "I et sidelæns marked bliver udbrud ofte afvist. Sweep af range-kanten fanger dem, der jagter udbruddet.",
     "betaler": "Tradere, der køber udbrud over toppen eller sælger brud under bunden i et marked uden trend.",
     "regler": {
-     "indgang": "Sweep af det laveste/højeste niveau de seneste 40 lys (15 min) + strukturskift, volumen ≥ 1.2× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre 0.25 × ATR under/over lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
-     "stop": "Bag sweep-lunten + 1.0 × ATR(15 min). Markedsordre (taker-gebyr).",
+     "indgang": "Sweep af det laveste/højeste niveau de seneste 40 lys (15 min) + strukturskift, volumen ≥ 1.2× normalt, bekræftet af EMA21 eller VWAP. Limit-ordre til lukkekursen (maker-gebyr); annulleres efter 2 lys uden fyld.",
+     "stop": "Bag sweep-lunten + 0.5 × ATR(15 min). Markedsordre (taker-gebyr).",
      "exit": "TP1 ved 2.5R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (5.0R uden niveau).",
      "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5."
     },
     "in_sample": {
-     "netto": -0.15545339979530698,
-     "handler": 183,
-     "koebt_og_holdt": 0.19487330506729503
+     "netto": -0.2268243154332288,
+     "handler": 240,
+     "koebt_og_holdt": 0.19778012334044703
     },
     "walk_forward": {
-     "netto": -0.10978530869327893,
-     "handler": 126,
-     "vinderrate": 0.2698412698412698,
-     "profitfaktor": 0.6606039677219948,
-     "stoerste_fald": 0.12625374383542592,
-     "laengste_tabsraekke": 11,
-     "vaerste_maaned": -0.02024316446613162,
-     "koebt_og_holdt": -0.22579038572197754,
-     "koebt_og_holdt_fald": 0.6622427737983678
+     "netto": -0.14590424275850244,
+     "handler": 124,
+     "vinderrate": 0.24193548387096775,
+     "profitfaktor": 0.5698997852326549,
+     "stoerste_fald": 0.1630467162577089,
+     "laengste_tabsraekke": 22,
+     "vaerste_maaned": -0.024364069162472482,
+     "koebt_og_holdt": -0.18657099585986286,
+     "koebt_og_holdt_fald": 0.68457899123762
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.8851148851148851,
+     "wf_permutation_p": 0.9240759240759241,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
     },
     "robusthed": 0.0,
-    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 13.",
+    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 24.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 89 % af forsøgene (p=0.885)",
+     "på usete data klarede blandede markeder sig lige så godt i 92 % af forsøgene (p=0.924)",
      "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
-     "lange tabsrækker (11) – Sentinel kan stoppe botten",
+     "lange tabsrækker (22) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
      "markedet kan skifte karakter, så fortidens edge forsvinder"
     ]
@@ -660,7 +679,8 @@
     "indstillinger": {
      "N": 55,
      "M": 10,
-     "stopATR": 2.0
+     "stopATR": 2.0,
+     "btcF": 0
     },
     "karakter": 3,
     "ide": "Køb, når dagens lukkekurs bryder over de seneste N dages top, og short, når den bryder under bunden. Hold så længe trenden varer.",
@@ -673,37 +693,38 @@
      "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position."
     },
     "in_sample": {
-     "netto": -0.05315757855087773,
-     "handler": 346,
-     "koebt_og_holdt": 1.2324782120973505
+     "netto": -0.3222552010359031,
+     "handler": 342,
+     "koebt_og_holdt": 1.0949516431775173
     },
     "walk_forward": {
-     "netto": 0.5030758541074685,
-     "handler": 441,
-     "vinderrate": 0.3922902494331066,
-     "profitfaktor": 1.2775286911840782,
-     "stoerste_fald": 0.5245216183839099,
-     "laengste_tabsraekke": 13,
-     "vaerste_maaned": -0.14994896381541775,
-     "koebt_og_holdt": -0.12469680211327815,
-     "koebt_og_holdt_fald": 1.4269796325153923
+     "netto": 0.3451614982775544,
+     "handler": 415,
+     "vinderrate": 0.39518072289156625,
+     "profitfaktor": 1.2030321426190282,
+     "stoerste_fald": 0.5281145638218585,
+     "laengste_tabsraekke": 14,
+     "vaerste_maaned": -0.10638933370883465,
+     "koebt_og_holdt": -0.14568285382639248,
+     "koebt_og_holdt_fald": 1.429214041621362
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": true,
-     "wf_permutation_p": 0.11188811188811189,
+     "wf_permutation_p": 0.12487512487512488,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
     },
-    "robusthed": 0.6666666666666666,
-    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 15.",
+    "robusthed": 0.25,
+    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 16.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.112)",
-     "lange tabsrækker (13) – Sentinel kan stoppe botten",
+     "på usete data klarede blandede markeder sig lige så godt i 12 % af forsøgene (p=0.125)",
+     "kun 25 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
+     "lange tabsrækker (14) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
      "markedet kan skifte karakter, så fortidens edge forsvinder"
     ]
@@ -718,7 +739,8 @@
     "indstillinger": {
      "N": 55,
      "M": 20,
-     "stopATR": 2.0
+     "stopATR": 2.0,
+     "btcF": 0
     },
     "karakter": 3,
     "ide": "Køb, når dagens lukkekurs bryder over de seneste N dages top, og short, når den bryder under bunden. Hold så længe trenden varer.",
@@ -731,37 +753,38 @@
      "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position."
     },
     "in_sample": {
-     "netto": -0.03366677927826717,
-     "handler": 342,
-     "koebt_og_holdt": 1.2324782120973505
+     "netto": -0.3042398268840604,
+     "handler": 338,
+     "koebt_og_holdt": 1.0949516431775173
     },
     "walk_forward": {
-     "netto": 0.5030758541074685,
-     "handler": 441,
-     "vinderrate": 0.3922902494331066,
-     "profitfaktor": 1.2775286911840782,
-     "stoerste_fald": 0.5245216183839099,
-     "laengste_tabsraekke": 13,
-     "vaerste_maaned": -0.14994896381541775,
-     "koebt_og_holdt": -0.12469680211327815,
-     "koebt_og_holdt_fald": 1.4269796325153923
+     "netto": 0.3451614982775544,
+     "handler": 415,
+     "vinderrate": 0.39518072289156625,
+     "profitfaktor": 1.2030321426190282,
+     "stoerste_fald": 0.5281145638218585,
+     "laengste_tabsraekke": 14,
+     "vaerste_maaned": -0.10638933370883465,
+     "koebt_og_holdt": -0.14568285382639248,
+     "koebt_og_holdt_fald": 1.429214041621362
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": true,
-     "wf_permutation_p": 0.11188811188811189,
+     "wf_permutation_p": 0.12487512487512488,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
     },
-    "robusthed": 0.6666666666666666,
-    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 15.",
+    "robusthed": 0.25,
+    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 16.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.112)",
-     "lange tabsrækker (13) – Sentinel kan stoppe botten",
+     "på usete data klarede blandede markeder sig lige så godt i 12 % af forsøgene (p=0.125)",
+     "kun 25 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
+     "lange tabsrækker (14) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
      "markedet kan skifte karakter, så fortidens edge forsvinder"
     ]
@@ -774,52 +797,54 @@
     "regime": "trend",
     "navn": "Dagstrend (udbrud på dagslys)",
     "indstillinger": {
-     "N": 20,
-     "M": 20,
-     "stopATR": 3.0
+     "N": 55,
+     "M": 10,
+     "stopATR": 2.0,
+     "btcF": 1
     },
     "karakter": 3,
     "ide": "Køb, når dagens lukkekurs bryder over de seneste N dages top, og short, når den bryder under bunden. Hold så længe trenden varer.",
     "hvorfor": "Kryptomarkeder har lange trends, fordi nyheder og flow spreder sig langsomt. Få, store gevinster betaler for mange små tab, og de få handler holder gebyrerne nede.",
     "betaler": "Dem, der sælger for tidligt i en optrend eller køber for tidligt i en nedtrend, og dem der handler mod trenden.",
     "regler": {
-     "indgang": "Dagens lukkekurs bryder over de seneste 20 dages top (køb) eller under bunden (short). Markedsordre næste dag.",
-     "stop": "3.0 × ATR(20 dage) fra indgangen. Stoppet følger med trenden for hver dag, der lukker.",
-     "exit": "Når lukkekursen bryder de seneste 20 dages kanal den anden vej, eller stoppet rammes.",
-     "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position."
+     "indgang": "Dagens lukkekurs bryder over de seneste 55 dages top (køb) eller under bunden (short). Markedsordre næste dag.",
+     "stop": "2.0 × ATR(20 dage) fra indgangen. Stoppet følger med trenden for hver dag, der lukker.",
+     "exit": "Når lukkekursen bryder de seneste 10 dages kanal den anden vej, eller stoppet rammes.",
+     "stoerrelse": "Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish."
     },
     "in_sample": {
-     "netto": 0.7934815851224748,
-     "handler": 404,
-     "koebt_og_holdt": 1.2324782120973505
+     "netto": -0.23710185939431927,
+     "handler": 326,
+     "koebt_og_holdt": 1.0949516431775173
     },
     "walk_forward": {
-     "netto": 0.5030758541074685,
-     "handler": 441,
-     "vinderrate": 0.3922902494331066,
-     "profitfaktor": 1.2775286911840782,
-     "stoerste_fald": 0.5245216183839099,
-     "laengste_tabsraekke": 13,
-     "vaerste_maaned": -0.14994896381541775,
-     "koebt_og_holdt": -0.12469680211327815,
-     "koebt_og_holdt_fald": 1.4269796325153923
+     "netto": 0.3451614982775544,
+     "handler": 415,
+     "vinderrate": 0.39518072289156625,
+     "profitfaktor": 1.2030321426190282,
+     "stoerste_fald": 0.5281145638218585,
+     "laengste_tabsraekke": 14,
+     "vaerste_maaned": -0.10638933370883465,
+     "koebt_og_holdt": -0.14568285382639248,
+     "koebt_og_holdt_fald": 1.429214041621362
     },
     "tests": {
-     "in_sample": true,
-     "permutation_p": 0.12087912087912088,
+     "in_sample": false,
+     "permutation_p": null,
      "permutation": false,
      "walk_forward": true,
-     "wf_permutation_p": 0.11188811188811189,
+     "wf_permutation_p": 0.12487512487512488,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
     },
-    "robusthed": 1.0,
-    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 15.",
+    "robusthed": 0.25,
+    "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 16.",
     "kan_fejle": [
-     "et blandet marked klarede sig lige så godt i 12 % af forsøgene (p=0.121) – kan være held",
-     "på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.112)",
-     "lange tabsrækker (13) – Sentinel kan stoppe botten",
+     "permutationstesten blev ikke kørt for netop disse indstillinger",
+     "på usete data klarede blandede markeder sig lige så godt i 12 % af forsøgene (p=0.125)",
+     "kun 25 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
+     "lange tabsrækker (14) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
      "markedet kan skifte karakter, så fortidens edge forsvinder"
     ]
