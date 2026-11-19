@@ -67,8 +67,8 @@ SETUPS = {
             hvorfor='Kryptomarkeder har lange trends, fordi nyheder og flow spreder sig langsomt. Få, store gevinster betaler for mange små tab, og de få handler holder gebyrerne nede.',
             betaler='Dem, der sælger for tidligt i en optrend eller køber for tidligt i en nedtrend, og dem der handler mod trenden.'),
 }
-GITTER = dict(lb=[10, 20, 40], stopATR=[0.5, 1.0], tp1R=[1.5, 2.0, 2.5], volF=[1.2, 1.5], limitATR=[0.0, 0.25])
-GITTER_DAG = dict(N=[20, 55], M=[10, 20], stopATR=[2.0, 3.0])
+GITTER = dict(lb=[10, 20, 40], stopATR=[0.5, 1.0], tp1R=[1.5, 2.0, 2.5], volF=[1.2, 1.5], limitATR=[0.0, 0.25], btcF=[0, 1])
+GITTER_DAG = dict(N=[20, 55], M=[10, 20], stopATR=[2.0, 3.0], btcF=[0, 1])
 DATAMAPPE = 'data'
 
 
@@ -99,7 +99,7 @@ def hent_data(moent, aar=AAR):
     """4 års 15-minutters lys for moent/USDT fra Binance Vision. Gemmer i data/ og henter kun det, der mangler."""
     os.makedirs(DATAMAPPE, exist_ok=True)
     sym = moent + 'USDT'
-    fil = os.path.join(DATAMAPPE, sym + '_15m.csv.gz')
+    fil = os.path.join(DATAMAPPE, sym + '_15m_fut.csv.gz')
     gl = pd.read_csv(fil) if os.path.exists(fil) else pd.DataFrame(columns=['t', 'o', 'h', 'l', 'c', 'v'])
     nu = _nu()
     fra = dt.datetime(nu.year - aar, nu.month, 1)
@@ -109,7 +109,8 @@ def hent_data(moent, aar=AAR):
     while (m.year, m.month) < (nu.year, nu.month):
         mn = m.strftime('%Y-%m')
         if not any(d.startswith(mn) for d in have) or sum(d.startswith(mn) for d in have) < 27:
-            b = _hent(f'https://data.binance.vision/data/spot/monthly/klines/{sym}/15m/{sym}-15m-{mn}.zip')
+            b = (_hent(f'https://data.binance.vision/data/futures/um/monthly/klines/{sym}/15m/{sym}-15m-{mn}.zip')
+                 or _hent(f'https://data.binance.vision/data/spot/monthly/klines/{sym}/15m/{sym}-15m-{mn}.zip'))
             if b:
                 dele.append(_laes_zip(b))
         m = dt.datetime(m.year + (m.month == 12), m.month % 12 + 1, 1)
@@ -117,7 +118,8 @@ def hent_data(moent, aar=AAR):
     while d.date() < nu.date():
         ds = d.strftime('%Y-%m-%d')
         if ds not in have:
-            b = _hent(f'https://data.binance.vision/data/spot/daily/klines/{sym}/15m/{sym}-15m-{ds}.zip')
+            b = (_hent(f'https://data.binance.vision/data/futures/um/daily/klines/{sym}/15m/{sym}-15m-{ds}.zip')
+                 or _hent(f'https://data.binance.vision/data/spot/daily/klines/{sym}/15m/{sym}-15m-{ds}.zip'))
             if b:
                 dele.append(_laes_zip(b))
         d += dt.timedelta(days=1)
@@ -128,6 +130,53 @@ def hent_data(moent, aar=AAR):
     df = df[df['t'] >= int(fra.replace(tzinfo=dt.timezone.utc).timestamp())]
     df.to_csv(fil, index=False, compression='gzip')
     return df.reset_index(drop=True)
+
+
+def hent_funding(moent, aar=AAR):
+    """Historisk funding for USDT-M futures (Binance Vision, månedlige filer). Returnerer DataFrame(t, rate) eller None."""
+    os.makedirs(DATAMAPPE, exist_ok=True)
+    sym = moent + 'USDT'
+    fil = os.path.join(DATAMAPPE, sym + '_funding.csv.gz')
+    gl = pd.read_csv(fil) if os.path.exists(fil) else pd.DataFrame(columns=['t', 'rate'])
+    have = set(pd.to_datetime(gl['t'], unit='s').dt.strftime('%Y-%m').unique()) if len(gl) else set()
+    nu = _nu()
+    m = dt.datetime(nu.year - aar, nu.month, 1)
+    dele = [gl]
+    while (m.year, m.month) < (nu.year, nu.month):
+        mn = m.strftime('%Y-%m')
+        if mn not in have:
+            b = _hent(f'https://data.binance.vision/data/futures/um/monthly/fundingRate/{sym}/{sym}-fundingRate-{mn}.zip')
+            if b:
+                try:
+                    z = zipfile.ZipFile(io.BytesIO(b))
+                    f = pd.read_csv(z.open(z.namelist()[0]))
+                    tc = [c for c in f.columns if 'time' in c.lower()][0]
+                    rc = [c for c in f.columns if 'rate' in c.lower()][0]
+                    t = f[tc].astype(float).values
+                    dele.append(pd.DataFrame(dict(t=(np.where(t > 1e11, t / 1e3, t)).astype(np.int64), rate=f[rc].astype(float).values)))
+                except Exception:
+                    pass
+        m = dt.datetime(m.year + (m.month == 12), m.month % 12 + 1, 1)
+    df = pd.concat([x for x in dele if len(x)], ignore_index=True) if any(len(x) for x in dele) else None
+    if df is None or not len(df):
+        return None
+    df = df.drop_duplicates('t').sort_values('t')
+    df.to_csv(fil, index=False, compression='gzip')
+    return df.reset_index(drop=True)
+
+
+def saet_funding(df, fdf):
+    """Kolonnen f = funding, der betales i hvert 15-minutters lys (positiv: lange betaler). Uden data: 0,01 % hver 8. time."""
+    t = df['t'].values
+    f = np.where(t % 28800 == 0, FUNDING, 0.0)
+    if fdf is not None and len(fdf):
+        idx = np.searchsorted(t, fdf['t'].values, side='right') - 1
+        ok = (idx >= 0) & (fdf['t'].values - t[np.clip(idx, 0, None)] < 900)
+        sidst = int(fdf['t'].max())
+        f = np.where(t <= sidst, 0.0, f)                     # rigtig historik, hvor den findes
+        np.add.at(f, idx[ok], fdf['rate'].values[ok])
+    df = df.copy(); df['f'] = f
+    return df
 
 
 def syntetisk(moent, n=int(os.environ.get('LAB_N', 35040)), seed=0):
@@ -205,8 +254,9 @@ def _bekraeft(raa):
     return ud
 
 
-def forbered(df):
-    """Alt, der ikke afhænger af strategiens indstillinger, regnes én gang pr. kursforløb."""
+def forbered(df, btc=None):
+    """Alt, der ikke afhænger af strategiens indstillinger, regnes én gang pr. kursforløb.
+    btc = (tider, regime) for BTC – bruges som filter for de andre mønter. None = ingen filter (BTC selv)."""
     df = df.reset_index(drop=True)
     o, h, l, c, v, t = (df[k].values.astype(np.float64) for k in 'ohlcvt')
     t = df['t'].values.astype(np.int64)
@@ -239,12 +289,21 @@ def forbered(df):
     vavg = pd.Series(np.where(v > 0, v, np.nan)).rolling(34, min_periods=10).mean().shift(6).values
     mins = {lb: pd.Series(l).rolling(lb).min().shift(1).values for lb in GITTER['lb']}
     maks = {lb: pd.Series(h).rolling(lb).max().shift(1).values for lb in GITTER['lb']}
+    if btc is not None:
+        bi = np.searchsorted(btc[0], t, side='right') - 1
+        btcreg = np.where(bi >= 0, btc[1][np.clip(bi, 0, None)], -1).astype(np.int8)
+    else:
+        btcreg = np.full(len(t), -1, np.int8)
+    fper = df['f'].values if 'f' in df else np.where(t % 28800 == 0, FUNDING, 0.0)
+    fcum = np.cumsum(fper).astype(np.float64)
     dg = aggreger(df, 96)
     trd = true_range(dg['h'].values, dg['l'].values, dg['c'].values)
     dag = dict(o=dg['o'].values.astype(np.float64), h=dg['h'].values.astype(np.float64), l=dg['l'].values.astype(np.float64),
                c=dg['c'].values.astype(np.float64), t=dg['t'].values.astype(np.int64), slut=dg['slut'].values.astype(np.int64),
                atr=pd.Series(trd).rolling(20).mean().fillna(0).values.astype(np.float64))
-    return dict(dag=dag, o=o, h=h, l=l, c=c, v=v, t=t, reg=reg, atr15=pd.Series(true_range(h, l, c)).rolling(14).mean().values,
+    di = np.clip(np.searchsorted(t, dag['slut'] - 900, side='left'), 0, len(t) - 1)   # dagens sidste 15-min-lys
+    dag['btc'] = btcreg[di]; dag['fcum'] = fcum[di]
+    return dict(dag=dag, btcreg=btcreg, fcum=fcum, o=o, h=h, l=l, c=c, v=v, t=t, reg=reg, atr15=pd.Series(true_range(h, l, c)).rolling(14).mean().values,
                 ema21=ema(c, 21), rsi=rsi(c), vwap=vwap, vavg=vavg, atr4=atr4, shL=shL, shK=shK, shT=shT,
                 slL=slL, slK=slK, slT=slT, mins=mins, maks=maks)
 
@@ -252,8 +311,8 @@ def forbered(df):
 # ----------------------------------------------------------------------------- simulering (samme regler som botten)
 @njit(cache=True)
 def _simuler(o, h, l, c, v, t, reg, atr15, ema21, rsi_, vwap, vavg, atr4, rmin, rmax,
-             shL, shK, shT, slL, slK, slT, setup, lb, stopATR, tp1R, volF, limitATR, start, slut,
-             kost, gm, gt, slip, funding, vent, risiko, makspos, minrr):
+             shL, shK, shT, slL, slK, slT, btcreg, fcum, setup, lb, stopATR, tp1R, volF, limitATR, btcF, start, slut,
+             kost, gm, gt, slip, vent, risiko, makspos, minrr):
     n = len(c)
     ud_ind = np.empty(n, np.int64); ud_ud = np.empty(n, np.int64); ud_pnl = np.empty(n); ud_dir = np.empty(n, np.int8)
     m = 0
@@ -282,6 +341,7 @@ def _simuler(o, h, l, c, v, t, reg, atr15, ema21, rsi_, vwap, vavg, atr4, rmin, 
         for dirn in (1, -1):
             if setup == 0 and dirn == -1: continue
             if setup == 1 and dirn == 1: continue
+            if btcF == 1 and ((dirn == 1 and btcreg[i] == 2) or (dirn == -1 and btcreg[i] == 1)): continue   # BTC-filter
             lang = dirn == 1
             fundet = False; lunte = 0.0; vmax = 0.0; struktur = 0.0
             for k in range(i - 1, i - 8, -1):
@@ -394,7 +454,7 @@ def _simuler(o, h, l, c, v, t, reg, atr15, ema21, rsi_, vwap, vavg, atr4, rmin, 
             px = c[n - 1]
             pnl += frac * rest * (b_dir * (px / fill - 1) - gt)
             slutj = n - 1
-        pnl -= frac * b_dir * funding * (slutj - e + 1) / 32.0   # funding pr. 8 timer = 32 lys
+        pnl -= frac * b_dir * (fcum[slutj] - fcum[e - 1])     # rigtig funding i holdeperioden (lange betaler ved positiv sats)
         ud_ind[m] = e; ud_ud[m] = slutj; ud_pnl[m] = pnl; ud_dir[m] = b_dir
         m += 1
         i = slutj + 1                             # én position ad gangen pr. marked
@@ -402,7 +462,7 @@ def _simuler(o, h, l, c, v, t, reg, atr15, ema21, rsi_, vwap, vavg, atr4, rmin, 
 
 
 @njit(cache=True)
-def _simuler_dag(o, h, l, c, atrd, N, M, stopATR, start, slut, gt, slip, funding, risiko, makspos):
+def _simuler_dag(o, h, l, c, atrd, btc, fcum, N, M, stopATR, btcF, start, slut, gt, slip, risiko, makspos):
     """Dagstrend: signal på et AFSLUTTET dagslys, indgang på næste dags åbning (markedsordre), glidende stop og
     udgang, når lukkekursen bryder M dages kanal den anden vej."""
     n = len(c)
@@ -422,6 +482,7 @@ def _simuler_dag(o, h, l, c, atrd, N, M, stopATR, start, slut, gt, slip, funding
         if c[i] > hoej and c[i - 1] <= hoej1: d = 1
         elif c[i] < lav and c[i - 1] >= lav1: d = -1
         a = atrd[i]
+        if btcF == 1 and ((d == 1 and btc[i] == 2) or (d == -1 and btc[i] == 1)): d = 0   # BTC-filter
         if d == 0 or not (a > 0):
             i += 1
             continue
@@ -461,7 +522,7 @@ def _simuler_dag(o, h, l, c, atrd, N, M, stopATR, start, slut, gt, slip, funding
         if slutj < 0:
             pnl += frac * (d * (c[n - 1] / fill - 1) - gt)
             slutj = n - 1
-        pnl -= frac * d * funding * 3.0 * (slutj - e + 1)   # 3 funding-perioder pr. døgn
+        pnl -= frac * d * (fcum[slutj] - fcum[e - 1])   # rigtig funding i holdeperioden
         ud_ind[m] = e; ud_ud[m] = slutj; ud_pnl[m] = pnl; ud_dir[m] = d
         m += 1
         i = slutj + 1
@@ -482,16 +543,17 @@ def simuler(F, setup, p, start=0, slut=None):
         t1 = F['t'][slut - 1] + 900 if slut > 0 else 0
         ds = int(np.searchsorted(D['slut'], t0 + 1, side='left'))       # første dag, der lukker efter start
         de = int(np.searchsorted(D['slut'], t1, side='right'))          # dage lukket inden slut
-        ind, ud, pnl, d = _simuler_dag(D['o'], D['h'], D['l'], D['c'], D['atr'], int(p['N']), int(p['M']), float(p['stopATR']),
-                                       ds, de, G['GEBYR_T'], G['SLIP'], G['FUNDING'], RISIKO, MAKS_POS)
+        ind, ud, pnl, d = _simuler_dag(D['o'], D['h'], D['l'], D['c'], D['atr'], D['btc'], D['fcum'], int(p['N']), int(p['M']), float(p['stopATR']),
+                                       int(p.get('btcF', 0)), ds, de, G['GEBYR_T'], G['SLIP'], RISIKO, MAKS_POS)
         # dagsindeks → indeks i 15-minutters lysene (dagens sidste lys)
         til15 = np.clip(np.searchsorted(F['t'], D['slut'][ud] - 900, side='left'), 0, len(F['t']) - 1)
         fra15 = np.clip(np.searchsorted(F['t'], D['t'][ind], side='left'), 0, len(F['t']) - 1)
         return fra15, til15, pnl, d
     return _simuler(F['o'], F['h'], F['l'], F['c'], F['v'], F['t'], F['reg'], F['atr15'], F['ema21'], F['rsi'], F['vwap'],
                     F['vavg'], F['atr4'], F['mins'][p['lb']], F['maks'][p['lb']], F['shL'], F['shK'], F['shT'],
-                    F['slL'], F['slK'], F['slT'], setup, p['lb'], float(p['stopATR']), float(p['tp1R']), float(p['volF']), float(p['limitATR']), start, slut,
-                    G['KOST'], G['GEBYR_M'], G['GEBYR_T'], G['SLIP'], G['FUNDING'], G['VENT'], RISIKO, MAKS_POS, MIN_RR)
+                    F['slL'], F['slK'], F['slT'], F['btcreg'], F['fcum'], setup, p['lb'], float(p['stopATR']), float(p['tp1R']), float(p['volF']), float(p['limitATR']),
+                    int(p.get('btcF', 0)), start, slut,
+                    G['KOST'], G['GEBYR_M'], G['GEBYR_T'], G['SLIP'], G['VENT'], RISIKO, MAKS_POS, MIN_RR)
 
 
 # ----------------------------------------------------------------------------- nøgletal
@@ -573,6 +635,8 @@ def permuter(df, rng, fra=0, til=None):
     no = nc - np.where(np.arange(len(df)) > fra, rc2, rc)
     no[:fra + 1] = lo[:fra + 1]
     ud = pd.DataFrame(dict(t=df['t'].values, o=np.exp(no), h=np.exp(no + rh2), l=np.exp(no + rl2), c=np.exp(nc), v=v2))
+    if 'f' in df:
+        ud['f'] = df['f'].values
     return ud
 
 
@@ -615,16 +679,22 @@ def naboer(p, alle):
     return ud
 
 
-def laboratorium(DFS, grundig=False, perms=1000, perms_grundig=200, hurtig=False, log=print):
+def laboratorium(DFS, grundig=False, perms=1000, perms_grundig=200, hurtig=False, log=print, navne=None):
     t0 = time.time()
-    FS = [forbered(df) for df in DFS]
+    navne = navne or [str(i) for i in range(len(DFS))]
+    btc = None
+    if 'BTC' in navne:
+        Fb = forbered(DFS[navne.index('BTC')])
+        btc = (Fb['t'], Fb['reg'])
+    BTCS = [None if n == 'BTC' else btc for n in navne]   # BTC-filteret gælder de andre mønter
+    FS = [forbered(df, BTCS[i]) for i, df in enumerate(DFS)]
     alle_t = np.concatenate([F['t'] for F in FS])
     t_start, t_slut = int(alle_t.min()), int(alle_t.max())
     is_slut = t_start + int((t_slut - t_start) * 0.75)          # in-sample: de første 3 af 4 år
     VARS = {s_: list(varianter(s_)) for s_ in SETUPS}
     if hurtig:
-        h_ = [dict(lb=20, stopATR=0.5, tp1R=2.0, volF=1.5, limitATR=0.0), dict(lb=20, stopATR=0.5, tp1R=2.0, volF=1.2, limitATR=0.0), dict(lb=10, stopATR=0.5, tp1R=2.0, volF=1.5, limitATR=0.25)]
-        VARS = {0: h_, 1: h_, 2: h_, 3: [dict(N=20, M=10, stopATR=2.0), dict(N=55, M=20, stopATR=3.0)]}
+        h_ = [dict(lb=20, stopATR=0.5, tp1R=2.0, volF=1.5, limitATR=0.0, btcF=1), dict(lb=20, stopATR=0.5, tp1R=2.0, volF=1.2, limitATR=0.0, btcF=0), dict(lb=10, stopATR=0.5, tp1R=2.0, volF=1.5, limitATR=0.25, btcF=1)]
+        VARS = {0: h_, 1: h_, 2: h_, 3: [dict(N=20, M=10, stopATR=2.0, btcF=1), dict(N=55, M=20, stopATR=3.0, btcF=0)]}
     rng = np.random.default_rng(42)
     aar, kvartal = 365 * 86400, 91 * 86400
     folder, t = [], t_start + aar
@@ -663,7 +733,7 @@ def laboratorium(DFS, grundig=False, perms=1000, perms_grundig=200, hurtig=False
     log(f"\nPermutationstest: {n2} in-sample ({'optimeret forfra' if grundig else 'faste indstillinger'}) + {n4} walk-forward ...")
     for k in range(max(n2, n4)):
         if k < n2:
-            PF = [forbered(permuter(df, rng, 0, int(np.searchsorted(df['t'].values, is_slut)))) for df in DFS]
+            PF = [forbered(permuter(df, rng, 0, int(np.searchsorted(df['t'].values, is_slut))), BTCS[i]) for i, df in enumerate(DFS)]
             for setup, I in info.items():
                 if grundig:
                     I['perm2'].append(optimer(PF, setup, None, is_slut, VARS[setup])[0][0])
@@ -671,7 +741,7 @@ def laboratorium(DFS, grundig=False, perms=1000, perms_grundig=200, hurtig=False
                     for c in I['kandidater']:
                         c['perm'].append(maal(noegletal(koer_alle(PF, setup, c['p'], None, is_slut))))
         if k < n4:
-            PF = [forbered(permuter(df, rng, int(np.searchsorted(df['t'].values, oos_start)))) for df in DFS]
+            PF = [forbered(permuter(df, rng, int(np.searchsorted(df['t'].values, oos_start))), BTCS[i]) for i, df in enumerate(DFS)]
             for setup, I in info.items():
                 hs = []
                 for (a, b, c_, best) in I['valg']:
@@ -739,12 +809,12 @@ def regler_tekst(setup, p):
         return dict(indgang=f"Dagens lukkekurs bryder over de seneste {p['N']} dages top (køb) eller under bunden (short). Markedsordre næste dag.",
                     stop=f"{p['stopATR']} × ATR(20 dage) fra indgangen. Stoppet følger med trenden for hver dag, der lukker.",
                     exit=f"Når lukkekursen bryder de seneste {p['M']} dages kanal den anden vej, eller stoppet rammes.",
-                    stoerrelse=st)
+                    stoerrelse=st + (' BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish.' if p.get('btcF') else ''))
     return dict(indgang=f"Sweep af det laveste/højeste niveau de seneste {p['lb']} lys (15 min) + strukturskift, volumen ≥ {p['volF']}× normalt, bekræftet af EMA21 eller VWAP. "
                         + (f"Limit-ordre {p['limitATR']} × ATR under/over lukkekursen" if p['limitATR'] else "Limit-ordre til lukkekursen") + f" (maker-gebyr); annulleres efter {VENT} lys uden fyld.",
                 stop=f"Bag sweep-lunten + {p['stopATR']} × ATR(15 min). Markedsordre (taker-gebyr).",
                 exit=f"TP1 ved {p['tp1R']}R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau ({2*p['tp1R']}R uden niveau).",
-                stoerrelse=st + ' R:R efter gebyr ≥ 2,5.')
+                stoerrelse=st + ' R:R efter gebyr ≥ 2,5.' + (' BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish.' if p.get('btcF') else ''))
 
 
 def hvorfor_fejl(nt, p_is, p_wf, robust):
@@ -820,20 +890,20 @@ def main():
     hurtig = '--hurtig' in a
     moenter = MOENTER[:3] if hurtig else MOENTER
     if '--syntetisk' in a:
-        DFS = [syntetisk(m) for m in moenter]; kilde = 'kunstige testkurser (IKKE rigtige)'
+        DFS = [saet_funding(syntetisk(m), None) for m in moenter]; kilde = 'kunstige testkurser (IKKE rigtige)'
     else:
         DFS, ok = [], []
         for m in moenter:
             df = hent_data(m)
             if df is not None and len(df) > 20000:
-                DFS.append(df); ok.append(m)
+                DFS.append(saet_funding(df, hent_funding(m))); ok.append(m)
             else:
                 print(f"Springer {m} over – for lidt data")
-        moenter = ok; kilde = 'Binance Vision 15-minutters lys (USDT-par) som stedfortræder for WEEX'
+        moenter = ok; kilde = 'Binance Vision USDT-M futures (15-minutters lys og rigtig funding) som stedfortræder for WEEX'
         if not DFS:
             sys.exit('Ingen data kunne hentes')
     print(f"numba: {'ja' if NUMBA else 'nej (langsomt)'} · markeder: {len(DFS)} · grundig: {grundig}")
-    res = laboratorium(DFS, grundig=grundig, hurtig=hurtig)
+    res = laboratorium(DFS, grundig=grundig, hurtig=hurtig, navne=moenter)
     with open('strategier.json', 'w', encoding='utf-8') as f:
         json.dump(botfil(res), f, ensure_ascii=False, indent=1, default=float)
     with open('rapport.md', 'w', encoding='utf-8') as f:
