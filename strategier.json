@@ -1,5 +1,5 @@
 {
- "genereret": "2026-11-19T00:29Z",
+ "genereret": "2026-11-19T03:46Z",
  "periode": {
   "fra": "2022-11-01",
   "til": "2026-11-17",
@@ -124,7 +124,7 @@
     "in_sample": {
      "netto": -0.04083831696156476,
      "handler": 404,
-     "koebt_og_holdt": 1.082267752214112
+     "koebt_og_holdt": 1.0822677522141129
     },
     "walk_forward": {
      "netto": -0.23988991006824661,
@@ -134,8 +134,8 @@
      "stoerste_fald": 0.37875292789984544,
      "laengste_tabsraekke": 14,
      "vaerste_maaned": -0.05160244643233033,
-     "koebt_og_holdt": 0.41322662378275365,
-     "koebt_og_holdt_fald": 0.7102358844754514
+     "koebt_og_holdt": 0.413226623782754,
+     "koebt_og_holdt_fald": 0.7102358844754513
     },
     "tests": {
      "in_sample": false,
@@ -185,7 +185,7 @@
     "in_sample": {
      "netto": -0.0441298065152334,
      "handler": 298,
-     "koebt_og_holdt": 1.082267752214112
+     "koebt_og_holdt": 1.0822677522141129
     },
     "walk_forward": {
      "netto": -0.23988991006824661,
@@ -195,8 +195,8 @@
      "stoerste_fald": 0.37875292789984544,
      "laengste_tabsraekke": 14,
      "vaerste_maaned": -0.05160244643233033,
-     "koebt_og_holdt": 0.41322662378275365,
-     "koebt_og_holdt_fald": 0.7102358844754514
+     "koebt_og_holdt": 0.413226623782754,
+     "koebt_og_holdt_fald": 0.7102358844754513
     },
     "tests": {
      "in_sample": false,
@@ -246,7 +246,7 @@
     "in_sample": {
      "netto": 0.010462876974742422,
      "handler": 352,
-     "koebt_og_holdt": 1.082267752214112
+     "koebt_og_holdt": 1.0822677522141129
     },
     "walk_forward": {
      "netto": -0.23988991006824661,
@@ -256,8 +256,8 @@
      "stoerste_fald": 0.37875292789984544,
      "laengste_tabsraekke": 14,
      "vaerste_maaned": -0.05160244643233033,
-     "koebt_og_holdt": 0.41322662378275365,
-     "koebt_og_holdt_fald": 0.7102358844754514
+     "koebt_og_holdt": 0.413226623782754,
+     "koebt_og_holdt_fald": 0.7102358844754513
     },
     "tests": {
      "in_sample": false,
@@ -308,7 +308,7 @@
     "in_sample": {
      "netto": 0.04624848662671533,
      "handler": 129,
-     "koebt_og_holdt": -0.11493774527350249
+     "koebt_og_holdt": -0.11493774527350256
     },
     "walk_forward": {
      "netto": -0.14892714370743715,
@@ -318,15 +318,15 @@
      "stoerste_fald": 0.31363963407666096,
      "laengste_tabsraekke": 20,
      "vaerste_maaned": -0.07420675023275564,
-     "koebt_og_holdt": -0.20000339404819403,
-     "koebt_og_holdt_fald": 0.702790169960592
+     "koebt_og_holdt": -0.2000033940481944,
+     "koebt_og_holdt_fald": 0.7027901699605921
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.46253746253746253,
+     "wf_permutation_p": 0.46053946053946054,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
@@ -335,7 +335,7 @@
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 22.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 46 % af forsøgene (p=0.463)",
+     "på usete data klarede blandede markeder sig lige så godt i 46 % af forsøgene (p=0.461)",
      "kun 40 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (20) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -369,7 +369,7 @@
     "in_sample": {
      "netto": 0.08050720859602391,
      "handler": 100,
-     "koebt_og_holdt": -0.11493774527350249
+     "koebt_og_holdt": -0.11493774527350256
     },
     "walk_forward": {
      "netto": -0.14892714370743715,
@@ -379,15 +379,15 @@
      "stoerste_fald": 0.31363963407666096,
      "laengste_tabsraekke": 20,
      "vaerste_maaned": -0.07420675023275564,
-     "koebt_og_holdt": -0.20000339404819403,
-     "koebt_og_holdt_fald": 0.702790169960592
+     "koebt_og_holdt": -0.2000033940481944,
+     "koebt_og_holdt_fald": 0.7027901699605921
     },
     "tests": {
      "in_sample": true,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.46253746253746253,
+     "wf_permutation_p": 0.46053946053946054,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
@@ -396,7 +396,7 @@
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 22.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 46 % af forsøgene (p=0.463)",
+     "på usete data klarede blandede markeder sig lige så godt i 46 % af forsøgene (p=0.461)",
      "lange tabsrækker (20) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
      "markedet kan skifte karakter, så fortidens edge forsvinder"
@@ -429,7 +429,7 @@
     "in_sample": {
      "netto": -0.07101987492737069,
      "handler": 177,
-     "koebt_og_holdt": -0.11493774527350249
+     "koebt_og_holdt": -0.11493774527350256
     },
     "walk_forward": {
      "netto": -0.14892714370743715,
@@ -439,15 +439,15 @@
      "stoerste_fald": 0.31363963407666096,
      "laengste_tabsraekke": 20,
      "vaerste_maaned": -0.07420675023275564,
-     "koebt_og_holdt": -0.20000339404819403,
-     "koebt_og_holdt_fald": 0.702790169960592
+     "koebt_og_holdt": -0.2000033940481944,
+     "koebt_og_holdt_fald": 0.7027901699605921
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.46253746253746253,
+     "wf_permutation_p": 0.46053946053946054,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
@@ -456,7 +456,7 @@
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 22.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 46 % af forsøgene (p=0.463)",
+     "på usete data klarede blandede markeder sig lige så godt i 46 % af forsøgene (p=0.461)",
      "kun 20 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (20) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -502,15 +502,15 @@
      "stoerste_fald": 0.12625374383542592,
      "laengste_tabsraekke": 11,
      "vaerste_maaned": -0.02024316446613162,
-     "koebt_og_holdt": -0.2257903857219777,
-     "koebt_og_holdt_fald": 0.662242773798368
+     "koebt_og_holdt": -0.22579038572197754,
+     "koebt_og_holdt_fald": 0.6622427737983678
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.8841158841158842,
+     "wf_permutation_p": 0.8851148851148851,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
@@ -519,7 +519,7 @@
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 13.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 88 % af forsøgene (p=0.884)",
+     "på usete data klarede blandede markeder sig lige så godt i 89 % af forsøgene (p=0.885)",
      "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (11) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -563,15 +563,15 @@
      "stoerste_fald": 0.12625374383542592,
      "laengste_tabsraekke": 11,
      "vaerste_maaned": -0.02024316446613162,
-     "koebt_og_holdt": -0.2257903857219777,
-     "koebt_og_holdt_fald": 0.662242773798368
+     "koebt_og_holdt": -0.22579038572197754,
+     "koebt_og_holdt_fald": 0.6622427737983678
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.8841158841158842,
+     "wf_permutation_p": 0.8851148851148851,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
@@ -580,7 +580,7 @@
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 13.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 88 % af forsøgene (p=0.884)",
+     "på usete data klarede blandede markeder sig lige så godt i 89 % af forsøgene (p=0.885)",
      "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (11) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -624,15 +624,15 @@
      "stoerste_fald": 0.12625374383542592,
      "laengste_tabsraekke": 11,
      "vaerste_maaned": -0.02024316446613162,
-     "koebt_og_holdt": -0.2257903857219777,
-     "koebt_og_holdt_fald": 0.662242773798368
+     "koebt_og_holdt": -0.22579038572197754,
+     "koebt_og_holdt_fald": 0.6622427737983678
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.8841158841158842,
+     "wf_permutation_p": 0.8851148851148851,
      "wf_permutation": false,
      "permutationer": 1000,
      "metode": "faste indstillinger"
@@ -641,7 +641,7 @@
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 13.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 88 % af forsøgene (p=0.884)",
+     "på usete data klarede blandede markeder sig lige så godt i 89 % af forsøgene (p=0.885)",
      "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (11) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -675,7 +675,7 @@
     "in_sample": {
      "netto": -0.05315757855087773,
      "handler": 346,
-     "koebt_og_holdt": 1.2324782120973485
+     "koebt_og_holdt": 1.2324782120973505
     },
     "walk_forward": {
      "netto": 0.5030758541074685,
@@ -685,8 +685,8 @@
      "stoerste_fald": 0.5245216183839099,
      "laengste_tabsraekke": 13,
      "vaerste_maaned": -0.14994896381541775,
-     "koebt_og_holdt": -0.12469680211327819,
-     "koebt_og_holdt_fald": 1.4269796325153932
+     "koebt_og_holdt": -0.12469680211327815,
+     "koebt_og_holdt_fald": 1.4269796325153923
     },
     "tests": {
      "in_sample": false,
@@ -733,7 +733,7 @@
     "in_sample": {
      "netto": -0.03366677927826717,
      "handler": 342,
-     "koebt_og_holdt": 1.2324782120973485
+     "koebt_og_holdt": 1.2324782120973505
     },
     "walk_forward": {
      "netto": 0.5030758541074685,
@@ -743,8 +743,8 @@
      "stoerste_fald": 0.5245216183839099,
      "laengste_tabsraekke": 13,
      "vaerste_maaned": -0.14994896381541775,
-     "koebt_og_holdt": -0.12469680211327819,
-     "koebt_og_holdt_fald": 1.4269796325153932
+     "koebt_og_holdt": -0.12469680211327815,
+     "koebt_og_holdt_fald": 1.4269796325153923
     },
     "tests": {
      "in_sample": false,
@@ -791,7 +791,7 @@
     "in_sample": {
      "netto": 0.7934815851224748,
      "handler": 404,
-     "koebt_og_holdt": 1.2324782120973485
+     "koebt_og_holdt": 1.2324782120973505
     },
     "walk_forward": {
      "netto": 0.5030758541074685,
@@ -801,8 +801,8 @@
      "stoerste_fald": 0.5245216183839099,
      "laengste_tabsraekke": 13,
      "vaerste_maaned": -0.14994896381541775,
-     "koebt_og_holdt": -0.12469680211327819,
-     "koebt_og_holdt_fald": 1.4269796325153932
+     "koebt_og_holdt": -0.12469680211327815,
+     "koebt_og_holdt_fald": 1.4269796325153923
     },
     "tests": {
      "in_sample": true,
