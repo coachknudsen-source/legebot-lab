@@ -38,3 +38,17 @@ lab.VENT = 0
 i0, _, p0, _ = lab.simuler(F, 0, p)
 ok(len(i0) == 0, 'ventetid 0 lys: ingen limit-ordre fyldes')
 lab.VENT = 2
+# 6) BTC-filter: med BTC i bearish regime åbner pullback-køb (kun lange) intet
+F3 = dict(F); F3['btcreg'] = np.full(len(F['t']), 2, np.int8)
+n0 = len(lab.simuler(F3, 0, dict(p, btcF=0))[0]); n1 = len(lab.simuler(F3, 0, dict(p, btcF=1))[0])
+ok(n0 > 0 and n1 == 0, f'BTC-filter stopper køb, når BTC er bearish ({n0} → {n1})')
+D3 = dict(F['dag']); D3['btc'] = np.full(len(D3['c']), 1, np.int8); F4 = dict(F); F4['dag'] = D3
+d_ = lab.simuler(F4, 3, dict(pd_, btcF=1))[3]
+ok(len(d_) == 0 or (d_ == 1).all(), 'BTC-filter: ingen dagstrend-short, når BTC er bullish')
+# 7) rigtig funding: højere funding gør lange handler dårligere og shorts bedre
+dfh = lab.saet_funding(df, pd.DataFrame(dict(t=df['t'].values[::32], rate=np.full(len(df['t'].values[::32]), 0.001))))
+Fh = lab.forbered(dfh)
+a_ = lab.simuler(F, 3, pd_); b_ = lab.simuler(Fh, 3, pd_)
+lang = a_[3] == 1
+ok(len(a_[2]) == len(b_[2]) and (b_[2][lang] < a_[2][lang]).all() and (b_[2][~lang] > a_[2][~lang]).all(), 'funding trækkes fra lange og lægges til shorts')
+ok(abs(Fh['fcum'][-1] - 0.001 * len(df['t'].values[::32])) < 1e-9, 'funding-historikken lægges ind i de rigtige lys')
