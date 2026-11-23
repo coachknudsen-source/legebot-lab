@@ -1,9 +1,9 @@
 {
- "genereret": "2026-11-22T03:51Z",
+ "genereret": "2026-11-23T03:41Z",
  "periode": {
   "fra": "2022-11-01",
-  "til": "2026-11-21",
-  "in_sample_til": "2025-11-16"
+  "til": "2026-11-22",
+  "in_sample_til": "2025-11-17"
  },
  "regimer": {
   "bull": null,
@@ -133,7 +133,7 @@
     "in_sample": {
      "netto": -0.11745050041639987,
      "handler": 507,
-     "koebt_og_holdt": 0.9806614350030807
+     "koebt_og_holdt": 0.9758502900830343
     },
     "walk_forward": {
      "netto": -0.07778489031910023,
@@ -151,16 +151,16 @@
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.38161838161838163,
+     "wf_permutation_p": 0.36163836163836166,
      "wf_permutation": false,
-     "permutationer": 200,
-     "metode": "optimeret forfra på hvert blandet forløb"
+     "permutationer": 1000,
+     "metode": "faste indstillinger"
     },
     "robusthed": 0.0,
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 19.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 38 % af forsøgene (p=0.382)",
+     "på usete data klarede blandede markeder sig lige så godt i 36 % af forsøgene (p=0.362)",
      "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (17) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -195,7 +195,7 @@
     "in_sample": {
      "netto": -0.1603693663633495,
      "handler": 677,
-     "koebt_og_holdt": 0.9806614350030807
+     "koebt_og_holdt": 0.9758502900830343
     },
     "walk_forward": {
      "netto": -0.07778489031910023,
@@ -213,16 +213,16 @@
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.38161838161838163,
+     "wf_permutation_p": 0.36163836163836166,
      "wf_permutation": false,
-     "permutationer": 200,
-     "metode": "optimeret forfra på hvert blandet forløb"
+     "permutationer": 1000,
+     "metode": "faste indstillinger"
     },
     "robusthed": 0.0,
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 19.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 38 % af forsøgene (p=0.382)",
+     "på usete data klarede blandede markeder sig lige så godt i 36 % af forsøgene (p=0.362)",
      "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (17) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -257,7 +257,7 @@
     "in_sample": {
      "netto": -0.04739998208104415,
      "handler": 476,
-     "koebt_og_holdt": 0.9806614350030807
+     "koebt_og_holdt": 0.9758502900830343
     },
     "walk_forward": {
      "netto": -0.07778489031910023,
@@ -275,16 +275,16 @@
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.38161838161838163,
+     "wf_permutation_p": 0.36163836163836166,
      "wf_permutation": false,
-     "permutationer": 200,
-     "metode": "optimeret forfra på hvert blandet forløb"
+     "permutationer": 1000,
+     "metode": "faste indstillinger"
     },
     "robusthed": 0.14285714285714285,
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 19.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 38 % af forsøgene (p=0.382)",
+     "på usete data klarede blandede markeder sig lige så godt i 36 % af forsøgene (p=0.362)",
      "kun 14 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (17) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -321,17 +321,17 @@
     "in_sample": {
      "netto": -0.20836590439299674,
      "handler": 161,
-     "koebt_og_holdt": -0.1410339244293708
+     "koebt_og_holdt": -0.12478136531166717
     },
     "walk_forward": {
-     "netto": -0.21498236620414907,
+     "netto": -0.2142561293676995,
      "handler": 255,
-     "vinderrate": 0.28627450980392155,
-     "profitfaktor": 0.7607824260222242,
+     "vinderrate": 0.2901960784313726,
+     "profitfaktor": 0.7614518738044855,
      "stoerste_fald": 0.29353927116419753,
      "laengste_tabsraekke": 21,
      "vaerste_maaned": -0.06774630456535524,
-     "koebt_og_holdt": -0.2363495999200013,
+     "koebt_og_holdt": -0.2365191274846626,
      "koebt_og_holdt_fald": 0.7063057873043479
     },
     "tests": {
@@ -339,16 +339,16 @@
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.7522477522477522,
+     "wf_permutation_p": 0.7452547452547452,
      "wf_permutation": false,
-     "permutationer": 200,
-     "metode": "optimeret forfra på hvert blandet forløb"
+     "permutationer": 1000,
+     "metode": "faste indstillinger"
     },
     "robusthed": 0.0,
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 23.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 75 % af forsøgene (p=0.752)",
+     "på usete data klarede blandede markeder sig lige så godt i 75 % af forsøgene (p=0.745)",
      "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (21) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -383,17 +383,17 @@
     "in_sample": {
      "netto": -0.1066516303846452,
      "handler": 126,
-     "koebt_og_holdt": -0.1410339244293708
+     "koebt_og_holdt": -0.12478136531166717
     },
     "walk_forward": {
-     "netto": -0.21498236620414907,
+     "netto": -0.2142561293676995,
      "handler": 255,
-     "vinderrate": 0.28627450980392155,
-     "profitfaktor": 0.7607824260222242,
+     "vinderrate": 0.2901960784313726,
+     "profitfaktor": 0.7614518738044855,
      "stoerste_fald": 0.29353927116419753,
      "laengste_tabsraekke": 21,
      "vaerste_maaned": -0.06774630456535524,
-     "koebt_og_holdt": -0.2363495999200013,
+     "koebt_og_holdt": -0.2365191274846626,
      "koebt_og_holdt_fald": 0.7063057873043479
     },
     "tests": {
@@ -401,16 +401,16 @@
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.7522477522477522,
+     "wf_permutation_p": 0.7452547452547452,
      "wf_permutation": false,
-     "permutationer": 200,
-     "metode": "optimeret forfra på hvert blandet forløb"
+     "permutationer": 1000,
+     "metode": "faste indstillinger"
     },
     "robusthed": 0.14285714285714285,
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 23.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 75 % af forsøgene (p=0.752)",
+     "på usete data klarede blandede markeder sig lige så godt i 75 % af forsøgene (p=0.745)",
      "kun 14 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (21) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -445,17 +445,17 @@
     "in_sample": {
      "netto": -0.13618933499647032,
      "handler": 193,
-     "koebt_og_holdt": -0.1410339244293708
+     "koebt_og_holdt": -0.12478136531166717
     },
     "walk_forward": {
-     "netto": -0.21498236620414907,
+     "netto": -0.2142561293676995,
      "handler": 255,
-     "vinderrate": 0.28627450980392155,
-     "profitfaktor": 0.7607824260222242,
+     "vinderrate": 0.2901960784313726,
+     "profitfaktor": 0.7614518738044855,
      "stoerste_fald": 0.29353927116419753,
      "laengste_tabsraekke": 21,
      "vaerste_maaned": -0.06774630456535524,
-     "koebt_og_holdt": -0.2363495999200013,
+     "koebt_og_holdt": -0.2365191274846626,
      "koebt_og_holdt_fald": 0.7063057873043479
     },
     "tests": {
@@ -463,16 +463,16 @@
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.7522477522477522,
+     "wf_permutation_p": 0.7452547452547452,
      "wf_permutation": false,
-     "permutationer": 200,
-     "metode": "optimeret forfra på hvert blandet forløb"
+     "permutationer": 1000,
+     "metode": "faste indstillinger"
     },
     "robusthed": 0.16666666666666666,
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 23.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 75 % af forsøgene (p=0.752)",
+     "på usete data klarede blandede markeder sig lige så godt i 75 % af forsøgene (p=0.745)",
      "kun 17 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (21) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -509,7 +509,7 @@
     "in_sample": {
      "netto": -0.1958823353025382,
      "handler": 159,
-     "koebt_og_holdt": 0.19249676711149385
+     "koebt_og_holdt": 0.16746996771802833
     },
     "walk_forward": {
      "netto": -0.14590424275850244,
@@ -519,24 +519,24 @@
      "stoerste_fald": 0.1630467162577089,
      "laengste_tabsraekke": 22,
      "vaerste_maaned": -0.024364069162472482,
-     "koebt_og_holdt": -0.20867301386708118,
-     "koebt_og_holdt_fald": 0.7019070849819499
+     "koebt_og_holdt": -0.20307220868715076,
+     "koebt_og_holdt_fald": 0.7053604518273878
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.9340659340659341,
+     "wf_permutation_p": 0.919080919080919,
      "wf_permutation": false,
-     "permutationer": 200,
-     "metode": "optimeret forfra på hvert blandet forløb"
+     "permutationer": 1000,
+     "metode": "faste indstillinger"
     },
     "robusthed": 0.0,
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 24.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 93 % af forsøgene (p=0.934)",
+     "på usete data klarede blandede markeder sig lige så godt i 92 % af forsøgene (p=0.919)",
      "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (22) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -571,7 +571,7 @@
     "in_sample": {
      "netto": -0.208236602841528,
      "handler": 371,
-     "koebt_og_holdt": 0.19249676711149385
+     "koebt_og_holdt": 0.16746996771802833
     },
     "walk_forward": {
      "netto": -0.14590424275850244,
@@ -581,24 +581,24 @@
      "stoerste_fald": 0.1630467162577089,
      "laengste_tabsraekke": 22,
      "vaerste_maaned": -0.024364069162472482,
-     "koebt_og_holdt": -0.20867301386708118,
-     "koebt_og_holdt_fald": 0.7019070849819499
+     "koebt_og_holdt": -0.20307220868715076,
+     "koebt_og_holdt_fald": 0.7053604518273878
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.9340659340659341,
+     "wf_permutation_p": 0.919080919080919,
      "wf_permutation": false,
-     "permutationer": 200,
-     "metode": "optimeret forfra på hvert blandet forløb"
+     "permutationer": 1000,
+     "metode": "faste indstillinger"
     },
     "robusthed": 0.0,
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 24.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 93 % af forsøgene (p=0.934)",
+     "på usete data klarede blandede markeder sig lige så godt i 92 % af forsøgene (p=0.919)",
      "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (22) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -633,7 +633,7 @@
     "in_sample": {
      "netto": -0.17618193831622747,
      "handler": 278,
-     "koebt_og_holdt": 0.19249676711149385
+     "koebt_og_holdt": 0.16746996771802833
     },
     "walk_forward": {
      "netto": -0.14590424275850244,
@@ -643,24 +643,24 @@
      "stoerste_fald": 0.1630467162577089,
      "laengste_tabsraekke": 22,
      "vaerste_maaned": -0.024364069162472482,
-     "koebt_og_holdt": -0.20867301386708118,
-     "koebt_og_holdt_fald": 0.7019070849819499
+     "koebt_og_holdt": -0.20307220868715076,
+     "koebt_og_holdt_fald": 0.7053604518273878
     },
     "tests": {
      "in_sample": false,
      "permutation_p": null,
      "permutation": false,
      "walk_forward": false,
-     "wf_permutation_p": 0.9340659340659341,
+     "wf_permutation_p": 0.919080919080919,
      "wf_permutation": false,
-     "permutationer": 200,
-     "metode": "optimeret forfra på hvert blandet forløb"
+     "permutationer": 1000,
+     "metode": "faste indstillinger"
     },
     "robusthed": 0.0,
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 24.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 93 % af forsøgene (p=0.934)",
+     "på usete data klarede blandede markeder sig lige så godt i 92 % af forsøgene (p=0.919)",
      "kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (22) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -695,17 +695,17 @@
     "in_sample": {
      "netto": -0.3250276926481042,
      "handler": 343,
-     "koebt_og_holdt": 1.0580997694162382
+     "koebt_og_holdt": 1.0480439140634357
     },
     "walk_forward": {
-     "netto": 0.41226596262940735,
+     "netto": 0.40429619718364623,
      "handler": 415,
      "vinderrate": 0.39759036144578314,
-     "profitfaktor": 1.2427206391915648,
+     "profitfaktor": 1.2380284580790026,
      "stoerste_fald": 0.5281145638218585,
      "laengste_tabsraekke": 14,
      "vaerste_maaned": -0.10638933370883465,
-     "koebt_og_holdt": -0.19920870827755688,
+     "koebt_og_holdt": -0.19371994815502283,
      "koebt_og_holdt_fald": 1.4586781670347018
     },
     "tests": {
@@ -713,16 +713,16 @@
      "permutation_p": null,
      "permutation": false,
      "walk_forward": true,
-     "wf_permutation_p": 0.11288711288711288,
+     "wf_permutation_p": 0.10589410589410589,
      "wf_permutation": false,
-     "permutationer": 200,
-     "metode": "optimeret forfra på hvert blandet forløb"
+     "permutationer": 1000,
+     "metode": "faste indstillinger"
     },
     "robusthed": 0.25,
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 16.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.113)",
+     "på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.106)",
      "kun 25 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (14) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -755,17 +755,17 @@
     "in_sample": {
      "netto": -0.23987435100652038,
      "handler": 327,
-     "koebt_og_holdt": 1.0580997694162382
+     "koebt_og_holdt": 1.0480439140634357
     },
     "walk_forward": {
-     "netto": 0.41226596262940735,
+     "netto": 0.40429619718364623,
      "handler": 415,
      "vinderrate": 0.39759036144578314,
-     "profitfaktor": 1.2427206391915648,
+     "profitfaktor": 1.2380284580790026,
      "stoerste_fald": 0.5281145638218585,
      "laengste_tabsraekke": 14,
      "vaerste_maaned": -0.10638933370883465,
-     "koebt_og_holdt": -0.19920870827755688,
+     "koebt_og_holdt": -0.19371994815502283,
      "koebt_og_holdt_fald": 1.4586781670347018
     },
     "tests": {
@@ -773,16 +773,16 @@
      "permutation_p": null,
      "permutation": false,
      "walk_forward": true,
-     "wf_permutation_p": 0.11288711288711288,
+     "wf_permutation_p": 0.10589410589410589,
      "wf_permutation": false,
-     "permutationer": 200,
-     "metode": "optimeret forfra på hvert blandet forløb"
+     "permutationer": 1000,
+     "metode": "faste indstillinger"
     },
     "robusthed": 0.25,
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 16.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.113)",
+     "på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.106)",
      "kun 25 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (14) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",
@@ -815,17 +815,17 @@
     "in_sample": {
      "netto": -0.30701231849626154,
      "handler": 339,
-     "koebt_og_holdt": 1.0580997694162382
+     "koebt_og_holdt": 1.0480439140634357
     },
     "walk_forward": {
-     "netto": 0.41226596262940735,
+     "netto": 0.40429619718364623,
      "handler": 415,
      "vinderrate": 0.39759036144578314,
-     "profitfaktor": 1.2427206391915648,
+     "profitfaktor": 1.2380284580790026,
      "stoerste_fald": 0.5281145638218585,
      "laengste_tabsraekke": 14,
      "vaerste_maaned": -0.10638933370883465,
-     "koebt_og_holdt": -0.19920870827755688,
+     "koebt_og_holdt": -0.19371994815502283,
      "koebt_og_holdt_fald": 1.4586781670347018
     },
     "tests": {
@@ -833,16 +833,16 @@
      "permutation_p": null,
      "permutation": false,
      "walk_forward": true,
-     "wf_permutation_p": 0.11288711288711288,
+     "wf_permutation_p": 0.10589410589410589,
      "wf_permutation": false,
-     "permutationer": 200,
-     "metode": "optimeret forfra på hvert blandet forløb"
+     "permutationer": 1000,
+     "metode": "faste indstillinger"
     },
     "robusthed": 0.25,
     "advarsel": "Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 16.",
     "kan_fejle": [
      "permutationstesten blev ikke kørt for netop disse indstillinger",
-     "på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.113)",
+     "på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.106)",
      "kun 25 % af nabo-indstillingerne tjener penge – kan være én heldig værdi",
      "lange tabsrækker (14) – Sentinel kan stoppe botten",
      "backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen",

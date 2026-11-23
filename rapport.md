@@ -1,7 +1,7 @@
 # Legebot-laboratoriet – strategikort
 
-Genereret 2026-11-22T03:51Z · data 2022-11-01 til 2026-11-21 (in-sample til 2025-11-16) · kilde: Binance Vision USDT-M futures (15-minutters lys og rigtig funding) som stedfortræder for WEEX · markeder: BTC, ETH, SOL, XRP, ADA, DOGE, LINK, DOT, AVAX, LTC, BCH, ATOM, UNI, AAVE, TRX
-Permutationstest: grundig (søndag) · kørselstid 3256 sek.
+Genereret 2026-11-23T03:41Z · data 2022-11-01 til 2026-11-22 (in-sample til 2025-11-17) · kilde: Binance Vision USDT-M futures (15-minutters lys og rigtig funding) som stedfortræder for WEEX · markeder: BTC, ETH, SOL, XRP, ADA, DOGE, LINK, DOT, AVAX, LTC, BCH, ATOM, UNI, AAVE, TRX
+Permutationstest: nat · kørselstid 2448 sek.
 
 Afkast er summen af handlernes resultat i % af formuen med 1 % risiko pr. handel, efter WEEX-gebyrer (maker 0,02 %, taker 0,08 %), prisforskel og funding. Købt og holdt er lige vægtet og kun i de perioder, hvor markedet var i regimet.
 
@@ -16,10 +16,10 @@ Afkast er summen af handlernes resultat i % af formuen med 1 % risiko pr. handel
 - **Exit:** TP1 ved 2.0R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (4.0R uden niveau).
 - **Størrelse:** Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5. BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish.
 - **Resultat uden for træningsdata (walk-forward):** -7.8 % på 260 handler · 31 % vundne · profitfaktor 0.90 · største fald -26.2 % · købt og holdt i regimet +32.5 % (fald -68.0 %)
-- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 200 stk., optimeret forfra på hvert blandet forløb) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.3816)
+- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 1000 stk., faste indstillinger) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.3616)
 - **Værste måned:** -3.7 % · **længste tabsrække:** 17 · **holder på tværs af indstillinger:** 0 % af naboerne tjener penge
 - **Første advarselstegn:** Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 19.
-- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 38 % af forsøgene (p=0.382); kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (17) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
+- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 36 % af forsøgene (p=0.362); kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (17) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
 
 ### Udfordrer 1: Pullback-køb i bullish regime – IKKE BESTÅET · karakter 1/5
 - **Idé:** Køb, når en optrend laver et dyk, der fejer stop under et oplagt bund, og kursen derefter bryder op igen.
@@ -29,10 +29,10 @@ Afkast er summen af handlernes resultat i % af formuen med 1 % risiko pr. handel
 - **Exit:** TP1 ved 2.0R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (4.0R uden niveau).
 - **Størrelse:** Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5. BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish.
 - **Resultat uden for træningsdata (walk-forward):** -7.8 % på 260 handler · 31 % vundne · profitfaktor 0.90 · største fald -26.2 % · købt og holdt i regimet +32.5 % (fald -68.0 %)
-- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 200 stk., optimeret forfra på hvert blandet forløb) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.3816)
+- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 1000 stk., faste indstillinger) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.3616)
 - **Værste måned:** -3.7 % · **længste tabsrække:** 17 · **holder på tværs af indstillinger:** 0 % af naboerne tjener penge
 - **Første advarselstegn:** Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 19.
-- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 38 % af forsøgene (p=0.382); kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (17) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
+- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 36 % af forsøgene (p=0.362); kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (17) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
 
 ### Udfordrer 2: Pullback-køb i bullish regime – IKKE BESTÅET · karakter 1/5
 - **Idé:** Køb, når en optrend laver et dyk, der fejer stop under et oplagt bund, og kursen derefter bryder op igen.
@@ -42,10 +42,10 @@ Afkast er summen af handlernes resultat i % af formuen med 1 % risiko pr. handel
 - **Exit:** TP1 ved 2.0R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (4.0R uden niveau).
 - **Størrelse:** Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5. BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish.
 - **Resultat uden for træningsdata (walk-forward):** -7.8 % på 260 handler · 31 % vundne · profitfaktor 0.90 · største fald -26.2 % · købt og holdt i regimet +32.5 % (fald -68.0 %)
-- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 200 stk., optimeret forfra på hvert blandet forløb) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.3816)
+- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 1000 stk., faste indstillinger) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.3616)
 - **Værste måned:** -3.7 % · **længste tabsrække:** 17 · **holder på tværs af indstillinger:** 14 % af naboerne tjener penge
 - **Første advarselstegn:** Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 19.
-- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 38 % af forsøgene (p=0.382); kun 14 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (17) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
+- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 36 % af forsøgene (p=0.362); kun 14 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (17) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
 
 ## Regime: flat
 **Ingen strategi bestod alle 4 tests. Profilen Forsigtig handler ikke her; Normal og Aggressiv handler kun med halv risiko.**
@@ -57,11 +57,11 @@ Afkast er summen af handlernes resultat i % af formuen med 1 % risiko pr. handel
 - **Stop:** Bag sweep-lunten + 1.0 × ATR(15 min). Markedsordre (taker-gebyr).
 - **Exit:** TP1 ved 2.5R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (5.0R uden niveau).
 - **Størrelse:** Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5.
-- **Resultat uden for træningsdata (walk-forward):** -14.6 % på 124 handler · 24 % vundne · profitfaktor 0.57 · største fald -16.3 % · købt og holdt i regimet -20.9 % (fald -70.2 %)
-- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 200 stk., optimeret forfra på hvert blandet forløb) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.9341)
+- **Resultat uden for træningsdata (walk-forward):** -14.6 % på 124 handler · 24 % vundne · profitfaktor 0.57 · største fald -16.3 % · købt og holdt i regimet -20.3 % (fald -70.5 %)
+- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 1000 stk., faste indstillinger) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.9191)
 - **Værste måned:** -2.4 % · **længste tabsrække:** 22 · **holder på tværs af indstillinger:** 0 % af naboerne tjener penge
 - **Første advarselstegn:** Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 24.
-- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 93 % af forsøgene (p=0.934); kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (22) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
+- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 92 % af forsøgene (p=0.919); kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (22) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
 
 ### Udfordrer 1: Range-handel i flat regime – IKKE BESTÅET · karakter 1/5
 - **Idé:** Køb ved range-bunden og short ved range-toppen, når et sweep af niveauet bliver afvist.
@@ -70,11 +70,11 @@ Afkast er summen af handlernes resultat i % af formuen med 1 % risiko pr. handel
 - **Stop:** Bag sweep-lunten + 0.5 × ATR(15 min). Markedsordre (taker-gebyr).
 - **Exit:** TP1 ved 2.5R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (5.0R uden niveau).
 - **Størrelse:** Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5.
-- **Resultat uden for træningsdata (walk-forward):** -14.6 % på 124 handler · 24 % vundne · profitfaktor 0.57 · største fald -16.3 % · købt og holdt i regimet -20.9 % (fald -70.2 %)
-- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 200 stk., optimeret forfra på hvert blandet forløb) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.9341)
+- **Resultat uden for træningsdata (walk-forward):** -14.6 % på 124 handler · 24 % vundne · profitfaktor 0.57 · største fald -16.3 % · købt og holdt i regimet -20.3 % (fald -70.5 %)
+- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 1000 stk., faste indstillinger) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.9191)
 - **Værste måned:** -2.4 % · **længste tabsrække:** 22 · **holder på tværs af indstillinger:** 0 % af naboerne tjener penge
 - **Første advarselstegn:** Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 24.
-- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 93 % af forsøgene (p=0.934); kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (22) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
+- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 92 % af forsøgene (p=0.919); kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (22) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
 
 ### Udfordrer 2: Range-handel i flat regime – IKKE BESTÅET · karakter 1/5
 - **Idé:** Køb ved range-bunden og short ved range-toppen, når et sweep af niveauet bliver afvist.
@@ -83,11 +83,11 @@ Afkast er summen af handlernes resultat i % af formuen med 1 % risiko pr. handel
 - **Stop:** Bag sweep-lunten + 0.5 × ATR(15 min). Markedsordre (taker-gebyr).
 - **Exit:** TP1 ved 2.5R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (5.0R uden niveau).
 - **Størrelse:** Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5. BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish.
-- **Resultat uden for træningsdata (walk-forward):** -14.6 % på 124 handler · 24 % vundne · profitfaktor 0.57 · største fald -16.3 % · købt og holdt i regimet -20.9 % (fald -70.2 %)
-- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 200 stk., optimeret forfra på hvert blandet forløb) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.9341)
+- **Resultat uden for træningsdata (walk-forward):** -14.6 % på 124 handler · 24 % vundne · profitfaktor 0.57 · største fald -16.3 % · købt og holdt i regimet -20.3 % (fald -70.5 %)
+- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 1000 stk., faste indstillinger) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.9191)
 - **Værste måned:** -2.4 % · **længste tabsrække:** 22 · **holder på tværs af indstillinger:** 0 % af naboerne tjener penge
 - **Første advarselstegn:** Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 24.
-- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 93 % af forsøgene (p=0.934); kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (22) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
+- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 92 % af forsøgene (p=0.919); kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (22) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
 
 ## Regime: bearish
 **Ingen strategi bestod alle 4 tests. Profilen Forsigtig handler ikke her; Normal og Aggressiv handler kun med halv risiko.**
@@ -99,11 +99,11 @@ Afkast er summen af handlernes resultat i % af formuen med 1 % risiko pr. handel
 - **Stop:** Bag sweep-lunten + 1.0 × ATR(15 min). Markedsordre (taker-gebyr).
 - **Exit:** TP1 ved 2.5R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (5.0R uden niveau).
 - **Størrelse:** Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5. BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish.
-- **Resultat uden for træningsdata (walk-forward):** -21.5 % på 255 handler · 29 % vundne · profitfaktor 0.76 · største fald -29.4 % · købt og holdt i regimet -23.6 % (fald -70.6 %)
-- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 200 stk., optimeret forfra på hvert blandet forløb) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.7522)
+- **Resultat uden for træningsdata (walk-forward):** -21.4 % på 255 handler · 29 % vundne · profitfaktor 0.76 · største fald -29.4 % · købt og holdt i regimet -23.7 % (fald -70.6 %)
+- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 1000 stk., faste indstillinger) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.7453)
 - **Værste måned:** -6.8 % · **længste tabsrække:** 21 · **holder på tværs af indstillinger:** 0 % af naboerne tjener penge
 - **Første advarselstegn:** Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 23.
-- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 75 % af forsøgene (p=0.752); kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (21) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
+- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 75 % af forsøgene (p=0.745); kun 0 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (21) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
 
 ### Udfordrer 1: Breakdown-short i bearish regime – IKKE BESTÅET · karakter 1/5
 - **Idé:** Short, når en nedtrend laver et hop, der fejer stop over en oplagt top, og kursen derefter bryder ned igen.
@@ -112,11 +112,11 @@ Afkast er summen af handlernes resultat i % af formuen med 1 % risiko pr. handel
 - **Stop:** Bag sweep-lunten + 1.0 × ATR(15 min). Markedsordre (taker-gebyr).
 - **Exit:** TP1 ved 2.0R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (4.0R uden niveau).
 - **Størrelse:** Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5. BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish.
-- **Resultat uden for træningsdata (walk-forward):** -21.5 % på 255 handler · 29 % vundne · profitfaktor 0.76 · største fald -29.4 % · købt og holdt i regimet -23.6 % (fald -70.6 %)
-- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 200 stk., optimeret forfra på hvert blandet forløb) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.7522)
+- **Resultat uden for træningsdata (walk-forward):** -21.4 % på 255 handler · 29 % vundne · profitfaktor 0.76 · største fald -29.4 % · købt og holdt i regimet -23.7 % (fald -70.6 %)
+- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 1000 stk., faste indstillinger) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.7453)
 - **Værste måned:** -6.8 % · **længste tabsrække:** 21 · **holder på tværs af indstillinger:** 14 % af naboerne tjener penge
 - **Første advarselstegn:** Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 23.
-- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 75 % af forsøgene (p=0.752); kun 14 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (21) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
+- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 75 % af forsøgene (p=0.745); kun 14 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (21) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
 
 ### Udfordrer 2: Breakdown-short i bearish regime – IKKE BESTÅET · karakter 1/5
 - **Idé:** Short, når en nedtrend laver et hop, der fejer stop over en oplagt top, og kursen derefter bryder ned igen.
@@ -125,11 +125,11 @@ Afkast er summen af handlernes resultat i % af formuen med 1 % risiko pr. handel
 - **Stop:** Bag sweep-lunten + 1.0 × ATR(15 min). Markedsordre (taker-gebyr).
 - **Exit:** TP1 ved 2.5R med limit-ordre: halvdelen lukkes og stop flyttes til break-even inkl. gebyrer. TP2 ved næste 4H-niveau (5.0R uden niveau).
 - **Størrelse:** Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. R:R efter gebyr ≥ 2,5.
-- **Resultat uden for træningsdata (walk-forward):** -21.5 % på 255 handler · 29 % vundne · profitfaktor 0.76 · største fald -29.4 % · købt og holdt i regimet -23.6 % (fald -70.6 %)
-- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 200 stk., optimeret forfra på hvert blandet forløb) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.7522)
+- **Resultat uden for træningsdata (walk-forward):** -21.4 % på 255 handler · 29 % vundne · profitfaktor 0.76 · største fald -29.4 % · købt og holdt i regimet -23.7 % (fald -70.6 %)
+- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 1000 stk., faste indstillinger) · walk-forward ✘ · walk-forward-permutation ✘ (p=0.7453)
 - **Værste måned:** -6.8 % · **længste tabsrække:** 21 · **holder på tværs af indstillinger:** 17 % af naboerne tjener penge
 - **Første advarselstegn:** Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 23.
-- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 75 % af forsøgene (p=0.752); kun 17 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (21) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
+- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 75 % af forsøgene (p=0.745); kun 17 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (21) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
 
 ## Regime: alle (dagstrend)
 **Ingen strategi bestod alle 4 tests. Profilen Forsigtig handler ikke her; Normal og Aggressiv handler kun med halv risiko.**
@@ -141,11 +141,11 @@ Afkast er summen af handlernes resultat i % af formuen med 1 % risiko pr. handel
 - **Stop:** 2.0 × ATR(20 dage) fra indgangen. Stoppet følger med trenden for hver dag, der lukker.
 - **Exit:** Når lukkekursen bryder de seneste 10 dages kanal den anden vej, eller stoppet rammes.
 - **Størrelse:** Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position.
-- **Resultat uden for træningsdata (walk-forward):** +41.2 % på 415 handler · 40 % vundne · profitfaktor 1.24 · største fald -52.8 % · købt og holdt i regimet -19.9 % (fald -145.9 %)
-- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 200 stk., optimeret forfra på hvert blandet forløb) · walk-forward ✔ · walk-forward-permutation ✘ (p=0.1129)
+- **Resultat uden for træningsdata (walk-forward):** +40.4 % på 415 handler · 40 % vundne · profitfaktor 1.24 · største fald -52.8 % · købt og holdt i regimet -19.4 % (fald -145.9 %)
+- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 1000 stk., faste indstillinger) · walk-forward ✔ · walk-forward-permutation ✘ (p=0.1059)
 - **Værste måned:** -10.6 % · **længste tabsrække:** 14 · **holder på tværs af indstillinger:** 25 % af naboerne tjener penge
 - **Første advarselstegn:** Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 16.
-- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.113); kun 25 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (14) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
+- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.106); kun 25 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (14) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
 
 ### Udfordrer 1: Dagstrend (udbrud på dagslys) – IKKE BESTÅET · karakter 3/5
 - **Idé:** Køb, når dagens lukkekurs bryder over de seneste N dages top, og short, når den bryder under bunden. Hold så længe trenden varer.
@@ -154,11 +154,11 @@ Afkast er summen af handlernes resultat i % af formuen med 1 % risiko pr. handel
 - **Stop:** 2.0 × ATR(20 dage) fra indgangen. Stoppet følger med trenden for hver dag, der lukker.
 - **Exit:** Når lukkekursen bryder de seneste 10 dages kanal den anden vej, eller stoppet rammes.
 - **Størrelse:** Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position. BTC-filter: ingen køb, når BTC er bearish, og ingen short, når BTC er bullish.
-- **Resultat uden for træningsdata (walk-forward):** +41.2 % på 415 handler · 40 % vundne · profitfaktor 1.24 · største fald -52.8 % · købt og holdt i regimet -19.9 % (fald -145.9 %)
-- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 200 stk., optimeret forfra på hvert blandet forløb) · walk-forward ✔ · walk-forward-permutation ✘ (p=0.1129)
+- **Resultat uden for træningsdata (walk-forward):** +40.4 % på 415 handler · 40 % vundne · profitfaktor 1.24 · største fald -52.8 % · købt og holdt i regimet -19.4 % (fald -145.9 %)
+- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 1000 stk., faste indstillinger) · walk-forward ✔ · walk-forward-permutation ✘ (p=0.1059)
 - **Værste måned:** -10.6 % · **længste tabsrække:** 14 · **holder på tværs af indstillinger:** 25 % af naboerne tjener penge
 - **Første advarselstegn:** Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 16.
-- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.113); kun 25 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (14) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
+- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.106); kun 25 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (14) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
 
 ### Udfordrer 2: Dagstrend (udbrud på dagslys) – IKKE BESTÅET · karakter 3/5
 - **Idé:** Køb, når dagens lukkekurs bryder over de seneste N dages top, og short, når den bryder under bunden. Hold så længe trenden varer.
@@ -167,11 +167,11 @@ Afkast er summen af handlernes resultat i % af formuen med 1 % risiko pr. handel
 - **Stop:** 2.0 × ATR(20 dage) fra indgangen. Stoppet følger med trenden for hver dag, der lukker.
 - **Exit:** Når lukkekursen bryder de seneste 20 dages kanal den anden vej, eller stoppet rammes.
 - **Størrelse:** Styres af brugerens profil i botten (risiko pr. handel, maks. pr. position, dagsmål og tabsgrænse). Testet med 1 % risiko og højst 20 % pr. position.
-- **Resultat uden for træningsdata (walk-forward):** +41.2 % på 415 handler · 40 % vundne · profitfaktor 1.24 · største fald -52.8 % · købt og holdt i regimet -19.9 % (fald -145.9 %)
-- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 200 stk., optimeret forfra på hvert blandet forløb) · walk-forward ✔ · walk-forward-permutation ✘ (p=0.1129)
+- **Resultat uden for træningsdata (walk-forward):** +40.4 % på 415 handler · 40 % vundne · profitfaktor 1.24 · største fald -52.8 % · købt og holdt i regimet -19.4 % (fald -145.9 %)
+- **De 4 tests:** in-sample ✘ · permutation ✘ (p=None, 1000 stk., faste indstillinger) · walk-forward ✔ · walk-forward-permutation ✘ (p=0.1059)
 - **Værste måned:** -10.6 % · **længste tabsrække:** 14 · **holder på tværs af indstillinger:** 25 % af naboerne tjener penge
 - **Første advarselstegn:** Papirhandlen ligger under nul 3 uger i træk, eller den længste tabsrække overstiger 16.
-- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.113); kun 25 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (14) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
+- **HVORFOR DET KAN FEJLE:** permutationstesten blev ikke kørt for netop disse indstillinger; på usete data klarede blandede markeder sig lige så godt i 11 % af forsøgene (p=0.106); kun 25 % af nabo-indstillingerne tjener penge – kan være én heldig værdi; lange tabsrækker (14) – Sentinel kan stoppe botten; backtesten bruger Binance-kurser som stedfortræder for WEEX, og limit-ordrer antages fyldt, så snart kursen rører prisen; markedet kan skifte karakter, så fortidens edge forsvinder.
 
 ## Sidste tjek før en vinder kåres
 - Vinder den på data, den aldrig har set? → walk-forward-testen.
