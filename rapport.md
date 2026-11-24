@@ -1,7 +1,7 @@
 # Legebot-laboratoriet – strategikort
 
-Genereret 2026-11-23T03:41Z · data 2022-11-01 til 2026-11-22 (in-sample til 2025-11-17) · kilde: Binance Vision USDT-M futures (15-minutters lys og rigtig funding) som stedfortræder for WEEX · markeder: BTC, ETH, SOL, XRP, ADA, DOGE, LINK, DOT, AVAX, LTC, BCH, ATOM, UNI, AAVE, TRX
-Permutationstest: nat · kørselstid 2448 sek.
+Genereret 2026-11-24T03:49Z · data 2022-11-01 til 2026-11-22 (in-sample til 2025-11-17) · kilde: Binance Vision USDT-M futures (15-minutters lys og rigtig funding) som stedfortræder for WEEX · markeder: BTC, ETH, SOL, XRP, ADA, DOGE, LINK, DOT, AVAX, LTC, BCH, ATOM, UNI, AAVE, TRX
+Permutationstest: nat · kørselstid 3037 sek.
 
 Afkast er summen af handlernes resultat i % af formuen med 1 % risiko pr. handel, efter WEEX-gebyrer (maker 0,02 %, taker 0,08 %), prisforskel og funding. Købt og holdt er lige vægtet og kun i de perioder, hvor markedet var i regimet.
 
